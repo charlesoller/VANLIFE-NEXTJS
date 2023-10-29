@@ -2,26 +2,764 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+html, body {
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  background: darkgray;
+}
+
+a {
+  text-decoration: none;
+  color: #4D4D4D;
+}
+
+nav > a:hover,
+.active-link {
+  font-weight: bold;
+  border-bottom: 1px solid #161616;
+  margin-bottom: 1em;
+  color: #161616;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+/* --------------------- Type Tag Component --------------------- */
+
+.type-tag {
+  border-radius: 0.3125rem;
+  text-transform: capitalize;
+  width: fit-content;
+  text-align: center;
+}
+
+/* --------------------- Header --------------------- */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background: #FFF7ED;
+  padding: 2.25em 1.625em;
+  color: #4D4D4D;
+  font-weight: 600;
+  align-items: center;
+}
+
+.header__logo {
+  width: 20%;
+}
+
+.header__nav {
+  display: flex;
+  justify-content: space-around;
+  gap: 2em;
+  width: auto;
+}
+
+/* --------------------- Footer --------------------- */
+
+.footer {
+  background: #252525;
+  color: #AAA;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 1.625em 0;
+}
+
+/* --------------------- Home --------------------- */
+
+.home {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.46) 0%, rgba(0, 0, 0, 0.46) 100%), url("./assets/mountains.png"), lightgray 0px -65.191px / 100% 178.109% no-repeat;
+  background-size: cover;
+  padding: 4em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #FFF;
+  font-weight: 500;
+  line-height: 1.5rem;
+  height: 75vh;
+  margin-bottom: 0;
+}
+
+.home__title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 2.625rem;
+}
+
+.home__button {
+  border-radius: 0.3125rem;
+  font-size: 1.5rem;
+  background: #FF8C38;
+  color: #FFF;
+  width: 100%;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 3em;
+  padding: 2em 0;
+}
+
+.home__button:hover,
+.home__button:focus {
+  background: #ff9950;
+}
+
+/* --------------------- Home --------------------- */
+
+.about {
+  display: grid;
+  grid-template: repeat(5, auto) / 5% 90% 5%;
+  grid-template-areas:
+          "image image image"
+          "..... title ....."
+          "..... text1 ....."
+          "..... text2 ....."
+          "..... cta .......";
+  gap: 2em / 0;
+  color: #161616;
+  background: #FFF7ED;
+}
+
+.about__image { grid-area: image }
+.about__title { grid-area: title }
+.about__description__1 { grid-area: text1 }
+.about__description__2 { grid-area: text2 }
+.about__cta { grid-area: cta }
+
+.about__image {
+  width: 100%;
+  margin-bottom: 2em;
+}
+
+.about__title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.about__description__1,
+.about__description__2 {
+  font-weight: 500;
+}
+
+.about__cta {
+  border-radius: 0.3125rem;
+  background: #FFCC8D;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.875rem;
+  padding: 2.3em 2em;
+  margin: 2em 0 3em 0;
+}
+
+.about__cta__text {
+  margin: 0 0 0.7em 0;
+}
+
+.about__cta__button {
+  border-radius: 0.625rem;
+  background: #161616;
+  color:  #FFF;
+  line-height: 2rem;
+  padding: 0.75em 1.375em;
+  margin-top: 1em;
+}
+
+.about__cta__button:hover,
+.about__cta__button:focus {
+  background: #282828;
+}
+
+/* --------------------- Van Thumbnail Component --------------------- */
+
+/* Thumbnail Version */
+.van--thumbnail {
+  display: grid;
+  grid-template: auto auto auto auto / 80% 20%;
+  grid-template-areas:
+          "image image"
+          "name price"
+          "type price-subtext"
+          "type .....";
+  color: #161616;
+  margin: 0;
+}
+
+.van--thumbnail__image {
+  grid-area: image;
+  width: 100%;
+  border-radius: 0.3125em;
+}
+
+.van--thumbnail__name {
+  grid-area: name;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.van--thumbnail__price {
+  grid-area: price;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 0;
+  justify-self: right;
+  height: min-content;
+}
+
+.van--thumbnail__price-subtext {
+  grid-area: price-subtext;
+  justify-self: right;
+  margin-top: 0;
+}
+
+.van--thumbnail__type {
+  padding: 1em 2em;
+  margin-top: 1em;
+}
+
+/* --------------------- Van Detail Component --------------------- */
+
+.van--detail {
+  display: flex;
+  flex-direction: column;
+  margin: 2em 10em 4em 10em;
+  color: #161616;
+}
+
+.van--detail__image {
+  order: -2;
+  height: 70vh;
+  object-fit: cover;
+  object-position: 50% 50%;
+  margin-bottom: 2em;
+  border-radius: 0.5em;
+}
+
+.van--detail__name {
+  font-size: 3.5rem;
+  margin-bottom: 0;
+}
+
+.van--detail__price {
+  font-size: 2rem;
+  margin: 0.3em 0 0.6em 0;
+  font-weight: 600;
+}
+
+.van--detail__price-subtext {
+  font-size: 1.5rem;
+  font-weight: 400;
+
+}
+
+.van--detail__type {
+  padding: 0.7em 3em;
+  font-weight: 600;
+}
+
+.van--detail__description {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 2.5rem; /* 149.496% */
+}
+
+.van--detail__button {
+  border-radius: 0.3em;
+  background: #FF8C38;
+  color: #FFF;
+  color: #FFF;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 1.5em 0;
+  margin-top: 2em;
+}
+
+.van--detail__button:hover,
+.van--detail__button:focus {
+  background-color: #ffa667;
+}
+
+.van--detail__type {
+  order: -1;
+}
+
+.van--detail__back {
+  color: #201F1D;
+  font-weight: 500;
+  text-decoration: underline;
+  order: -3;
+  margin-bottom: 1em;
+}
+
+/* --------------------- Vans Page --------------------- */
+
+.vans {
+  margin-bottom: 4em;
+}
+
+.vans__title {
+  color: #161616;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-left: 2.2rem;
+}
+
+.vans__filters {
+  display: flex;
+  gap: 1em;
+  margin-left: 2.2rem;
+  margin-bottom: 2em;
+}
+
+.vans__filter {
+  padding: 1em 2em;
+  font-weight: 500;
+}
+
+.vans__filters__clear {
+  align-self: center;
+}
+
+.vans__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+  gap: 4em 2em;
+  padding: 2.2em;
+}
+
+/* --------------------- Host Page --------------------- */
+
+.host {
+  padding: 2em 6em;
+}
+
+.host__nav {
+  display: flex;
+  gap: 2em;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 3em;
+}
+
+/* --------------------- Host Vans Tab --------------------- */
+
+.host__vans {
+  color: #161616;
+}
+
+.host-vans__grid {
+  display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(30%, 1fr));
+  gap: 2em;
+  margin-bottom: 3em;
+}
+
+.host-vans__title {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+/* --------------------- Host Van Thumbnail Component --------------------- */
+
+.host-van--thumbnail {
+  /* background-color: red; */
+  padding: 2em;
+  display: grid;
+  grid-template: repeat(2, auto) / 15% 80%;
+  grid-template-areas:
+          "image name"
+          "image price";
+  border-radius: 0.4em;
+  background: #FFF;
+  color: #161616;
+  column-gap: 3em;
+}
+
+.host-van--thumbnail__name {
+  grid-area: name;
+  font-size: 2.5rem;
+  font-weight: 600;
+  align-self: end;
+  margin: 0;
+}
+
+.host-van--thumbnail__price {
+  grid-area: price;
+  font-size: 1.5rem;
+  align-self: start;
+  margin-top: 0.5em;
+}
+
+.host-van--thumbnail__image {
+  grid-area: image;
+  width: 100%;
+  border-radius: 0.4em;
+}
+
+/* --------------------- Host Van Detail Page --------------------- */
+
+.host-van--detail {
+  padding: 2em;
+  background: #FFF;
+  border-radius: 0.4em;
+  color: #161616;
+  margin: 1em 0 3em 0;
+}
+
+.host-van--detail__top-container {
+  display: grid;
+  grid-template: repeat(3, 1fr) / 25% 70%;
+  grid-template-areas:
+          "image type"
+          "image name"
+          "image price";
+  column-gap: 2.5em;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.host-van--detail__image {
+  grid-area: image;
+  width: 100%;
+  border-radius: 0.4em;
+}
+
+.host-van--detail__name {
+  grid-area: name;
+  font-size: 3rem;
+  margin: 0;
+  align-self: center;
+}
+
+.host-van--detail__type {
+  grid-area: type;
+  padding: 0.7em 2em;
+  font-size: 1.2rem;
+  font-weight: 600;
+  align-self: end;
+  margin-bottom: 1em;
+}
+
+.host-van--detail__price {
+  margin: 0;
+  grid-area: price;
+  align-self: start;
+  font-size: 1.6rem;
+}
+
+.host-van--detail__price-subtext {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.host-van--detail__nav {
+  display: flex;
+  gap: 1.5em;
+  font-size: 1.1rem;
+}
+
+.host-van--detail__details {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.host-van--detail__back {
+  color: #201F1D;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+/* Pricing */
+
+.host-van--detail__pricing {
+  color: #4D4D4D;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.host-van--detail__pricing__price {
+  color: #161616;
+  font-size: 2rem;
+}
+
+/* Photos */
+
+.host-van--detail__photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.host-van--detail__photos > img {
+  width: 100%;
+  border-radius: 0.2em;
+}
+
+/* --------------------- Page Not Found --------------------- */
+
+.page-not-found {
+  padding: 2em 5em;
+}
+
+.page-not-found__button {
+  border-radius: 4.983px;
+  background: #161616;
+  width: 100%;
+  text-align: center;
+  color: #FFF;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 2em 0;
+}
+
+.page-not-found__button:hover,
+.page-not-found__button:focus {
+  background: #282828;;
+}
+
+/* --------------------- Host Login Page --------------------- */
+
+.login-container {
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  /* width: 80%; */
+  /* align-items: center; */
+  /* justify-content: center; */
+}
+
+.login__email,
+.login__password {
+  color: #4D4D4D;
+  font-family: Inter;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.5em;
+  border: 1px solid lightgray;
+}
+
+.login__button {
+  border-radius: 6px;
+  background: #FF8C38;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+  color: #FFF;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 2em 0 4em 0;
+  padding: 1em;
+}
+
+.host-dashboard-earnings {
+  background-color: #ffead0;
+  padding: 37px 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.host-dashboard-earnings > .info > h1 {
+  font-size: 36px;
+  color: #161616;
+  margin: 0;
+}
+
+.host-dashboard-earnings > .info > p {
+  color: #4d4d4d;
+}
+
+.host-dashboard-earnings > .info > p > span {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.host-dashboard-earnings > .info > h2 {
+  margin: 0;
+  font-size: 38px;
+  color: #161616;
+  font-weight: 900;
+}
+
+.host-dashboard-reviews {
+  background-color: #ffddb2;
+  padding: 25px 26px;
+  display: flex;
+  align-items: center;
+}
+
+.host-dashboard-reviews > h2 {
+  margin: 0;
+}
+
+.host-dashboard-reviews .star {
+  color: #ff8c38;
+  margin-left: 15px;
+  font-size: 25px;
+}
+
+.host-dashboard-reviews p {
+  margin-left: 5px;
+  font-size: 20px;
+  color: #4d4d4d;
+  margin-right: auto;
+}
+
+.host-dashboard-reviews p > span {
+  font-weight: bold;
+  color: #161616;
+}
+
+.host-dashboard-vans {
+  padding: 38px 26px;
+}
+
+.host-dashboard-vans > .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.host-dashboard-vans .host-vans-list {
+  padding-inline: 0;
+}
+
+.host-income {
+  padding-inline: 26px;
+  color: #161616;
+}
+
+.host-income > p {
+  color: #4d4d4d;
+}
+
+.host-income > p span {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.host-income > h2 {
+  font-size: 38px;
+  color: #161616;
+  font-weight: 900;
+}
+
+img.graph {
+  width: 100%;
+  max-width: 500px;
+}
+
+.host-income .info-header > p {
+  color: #4d4d4d;
+}
+
+.host-income .info-header > p span {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.host-income .info-header > h3 {
+  font-weight: 700;
+  font-size: 24px;
+  margin-top: 60px;
+}
+
+.host-income .transaction {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  margin-bottom: 31px;
+  padding: 35px 29px;
+  border-radius: 6px;
+}
+.host-income .transaction > h3 {
+  font-size: 36px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.host-income .transaction > p {
+  font-weight: 500;
+  font-size: 20px;
+  color: #4d4d4d;
+}
+
+.host-reviews {
+  padding-inline: 26px;
+  color: #161616;
+}
+
+.host-reviews .top-text {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.host-reviews .top-text > h2 {
+  font-weight: 700;
+  font-size: 32px;
+  margin: 0;
+  margin-right: 20px;
+}
+
+.host-reviews .top-text > p {
+  margin: 0;
+  color: #4d4d4d;
+}
+
+.host-reviews .top-text > p span {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.host-reviews > img {
+  margin-bottom: 36px;
+}
+
+.host-reviews .review {
+  margin-block: 25px;
+}
+
+.host-reviews .review .info {
+  display: flex;
+}
+
+.host-reviews .review .name {
+  color: #161616;
+  margin-right: 10px;
+  font-weight: 600;
+}
+
+.host-reviews .review .date {
+  color: #8c8c8c;
+}
+
+.host-reviews hr {
+  background-color: #c7c7c7;
+  height: 1px;
+  border: 0;
+}
+
+.host-reviews .review-star {
+  color: #ff8c38;
+  margin-right: 5px;
 }
