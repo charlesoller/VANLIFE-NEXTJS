@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import logo from "../assets/vanlife_logo.png"
+import logo from "../../public/static/vanlife_logo.png"
 
 export default function NavBar(){
     return (

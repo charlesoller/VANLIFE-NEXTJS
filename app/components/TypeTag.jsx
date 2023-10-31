@@ -1,4 +1,4 @@
-import React from 'react'
+"use client"
 
 export default function TypeTag({ type, isFilter, className, isSelected }){
     const typeStyles = {
@@ -18,8 +18,18 @@ export default function TypeTag({ type, isFilter, className, isSelected }){
         color: isSelected ? "#FFEAD0" : "#4D4D4D"
     }
 
+    function changeBackground(event) {
+        event.target.style.background = typeStyles.background;
+        event.target.style.color = typeStyles.color;
+    }
+
+    function clearBackground(event) {
+        event.target.style.background = filterStyle.background;
+        event.target.style.color = filterStyle.color;
+    }
+
     return (
-        <button className={`type-tag ${className}`} style={isFilter ? filterStyle : typeStyles}>
+        <button className={`type-tag ${className}`} style={isFilter ? filterStyle : typeStyles} onMouseEnter={isFilter ? changeBackground : null} onMouseLeave={isFilter ? clearBackground : null}>
             { type }
         </button>
     )
