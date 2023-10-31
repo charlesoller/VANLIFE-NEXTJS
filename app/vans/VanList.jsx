@@ -1,39 +1,38 @@
 import Link from "next/link"
-import { createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
+
+//Custom Hooks
+import { useCreateServerClient } from "../api/customHooks"
 
 //Component Imports
 import VanThumbnail from "../components/VanThumbnail"
+import TypeTag from "../components/TypeTag"
 
 async function getVans(){
-    const cookieStore = cookies()
-    const supabase = createServerClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-        {
-          cookies: {
-            get(name) {
-              return cookieStore.get(name)?.value
-            },
-          },
-        }
-      )
+    const supabase = await useCreateServerClient();
 
     const { data, error } = await supabase.from('vans')
         .select()
 
     if(error){
-        console.log("ERROR")
+        console.log(error.message)
     }
 
     return data;
 }
 
-export default async function VanList(){
-    const vanData = await getVans();
-    const vansElement = vanData.map(van => {
+const vans = await getVans();
+export const filtersElement = [...new Set(vans.map(van => van.type))]   //creates set of unique items from type property
+    .map(filter => {
         return (
-            <Link className="van--thumbnail" href="van-detail" key={ van.id }>
+            <TypeTag type={filter} isFilter={true} className="vans__filter" key={filter}/>
+        )
+    })
+
+export default async function VanList(){
+    const vans = await getVans();
+    const vansElement = vans.map(van => {
+        return (
+            <Link className="van--thumbnail" href={`/vans/${van.id}`} key={ van.id }>
                 <VanThumbnail
                     name={ van.name }
                     price={ van.price }
@@ -44,6 +43,6 @@ export default async function VanList(){
         )
     })
     return (
-        vanData ? vansElement : <h1>There are no vans!</h1>
+        vans ? vansElement : <h1>There are no vans!</h1>
     )
 }
