@@ -2,23 +2,10 @@ import React from "react"
 import Link from "next/link";
 import { BsStarFill } from "react-icons/bs"
 
+import { getHostVans } from "../api/vanFetching";
 import { useCreateServerClient } from "../api/customHooks";
 
 export default async function Dashboard() {
-
-    async function getVans(){
-        const supabase = await useCreateServerClient();
-
-        const { data, error } = await supabase.from('vans')
-            .select()
-
-        if(error){
-            console.log(error.message)
-        }
-
-        return data;
-    }
-
     function renderVanElements(vans) {
         const hostVansEls = vans.map((van) => (
             <div className="host-van-single" key={van.id}>
@@ -38,7 +25,7 @@ export default async function Dashboard() {
         )
     }
 
-    const vans = await getVans();
+    const vans = await getHostVans();
 
     return (
         <>

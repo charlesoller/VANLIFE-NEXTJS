@@ -1,22 +1,10 @@
 import HostVanThumbnail from "../../components/HostVanThumbnail"
+
+import { getHostVans } from "@/app/api/vanFetching";
 import { useCreateServerClient } from "@/app/api/customHooks"
 
 export default async function HostVans(){
-    async function getVans(){
-        const supabase = await useCreateServerClient();
-
-        const { data, error } = await supabase.from('vans')
-            .select()
-            .eq('hostId', 123)
-
-        if(error){
-            console.log(error.message)
-        }
-
-        return data;
-    }
-
-    const vans = await getVans();
+    const vans = await getHostVans();
     const vansElement = vans.map(van => {
         return (
             <HostVanThumbnail

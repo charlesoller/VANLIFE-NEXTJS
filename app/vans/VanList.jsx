@@ -1,24 +1,11 @@
 import Link from "next/link"
 
 //Custom Hooks
-import { useCreateServerClient } from "../api/customHooks"
+import { getVans } from "../api/vanFetching"
 
 //Component Imports
 import VanThumbnail from "../components/VanThumbnail"
 import TypeTag from "../components/TypeTag"
-
-async function getVans(){
-    const supabase = await useCreateServerClient();
-
-    const { data, error } = await supabase.from('vans')
-        .select()
-
-    if(error){
-        console.log(error.message)
-    }
-
-    return data;
-}
 
 const vans = await getVans();
 export const filtersElement = [...new Set(vans.map(van => van.type))]   //creates set of unique items from type property

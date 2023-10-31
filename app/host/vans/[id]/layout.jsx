@@ -1,11 +1,11 @@
 import Link from "next/link"
 
 // Custom Functions
-import { useCreateServerClient } from "../../../api/customHooks"
 import { getVan } from "@/app/api/vanFetching";
 
 // Custom Components
 import TypeTag from "@/app/components/TypeTag";
+import HostVanDetailNav from "./HostVanDetailNav"
 
 export const metadata = {
   title: 'Van Life',
@@ -25,11 +25,7 @@ export default async function HostVanDetailLayout({ children, params }) {
               <h3 className="host-van--detail__price">${ van.price }<span className="host-van--detail__price-subtext">/day</span></h3>
               <TypeTag type={ van.type } className="host-van--detail__type"/>
           </div>
-          <nav className='host-van--detail__nav'>
-              <Link href={`/host/vans/${van.id}`} >Details</Link>
-              <Link href={`/host/vans/${van.id}/pricing`}>Pricing</Link>
-              <Link href={`/host/vans/${van.id}/photos`}>Photos</Link>
-          </nav>
+          <HostVanDetailNav id={van.id}/>
           {children}
       </div>
     </div>

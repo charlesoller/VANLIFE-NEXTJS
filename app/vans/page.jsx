@@ -7,7 +7,6 @@ import Loading from "../loading";
 
 export default function Vans(){
 
-
     return (
         <main className="vans">
             <h1 className="vans__title">Explore our van options</h1>
