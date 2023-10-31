@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link";
 import { useState } from "react"
 import { useRouter } from "next/navigation";
 import { createBrowserClient } from '@supabase/ssr'
@@ -35,11 +36,10 @@ export default function Login(){
     }
 
     return (
-        <main>
-            <h2 className="text-center">Log in</h2>
-
+        <main className="login-container">
+            <h2>Log in</h2>
             <AuthForm handleSubmit={handleSubmit}/>
-
+            <Link href="/signup"><p>Click here to sign up</p></Link>
             {error && (
                 <div className="error">{error}</div>
             )}

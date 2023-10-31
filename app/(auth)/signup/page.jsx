@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { createBrowserClient } from '@supabase/ssr'
+import Link from 'next/link'
 
 import AuthForm from "../AuthForm";
 import { useRouter } from "next/navigation";
@@ -17,7 +18,7 @@ export default function Signup(){
             process.env.NEXT_PUBLIC_SUPABASE_URL,
             process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
           )
-          
+
         const { error } = await supabase.auth.signUp({
             email,
             password,
@@ -34,9 +35,10 @@ export default function Signup(){
     }
 
     return (
-        <main>
-            <h2 className="text-center">Sign up</h2>
-            <AuthForm handleSubmit={handleSubmit} />
+        <main className="login-container">
+            <h2>Sign up</h2>
+            <AuthForm handleSubmit={handleSubmit}/>
+            <Link href="/login"><p>Click here to log in</p></Link>
             {error && (
                 <div className="error">{error}</div>
             )}

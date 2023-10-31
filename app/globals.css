@@ -537,7 +537,7 @@ button {
 /* --------------------- Host Login Page --------------------- */
 
 .login-container {
-  margin: 0 auto;
+  margin: 5em auto;
   width: 50%;
   text-align: center;
 }
@@ -553,7 +553,6 @@ button {
 .login__email,
 .login__password {
   color: #4D4D4D;
-  font-family: Inter;
   font-size: 1rem;
   font-weight: 400;
   padding: 0.5em;
