@@ -765,3 +765,11 @@ img.graph {
   color: #ff8c38;
   margin-right: 5px;
 }
+
+.logout-button {
+  background: #E17654;
+  color: #FFF;
+  padding: 0.5em 1em;
+  border-radius: 0.2em;
+  margin-bottom: 0.5em;
+}
