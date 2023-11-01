@@ -1,4 +1,4 @@
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
+import { useCreateServerClient } from "../customHooks"
 import { cookies } from 'next/headers'
 import { NextResponse } from "next/server"
 
@@ -9,7 +9,7 @@ export async function GET(request) {
 
     if (code) {
         //below runs on server but we can't access client cookies directly so we need to include/import cookies
-        const supabase = createRouteHandlerClient({ cookies })
+        const supabase = useCreateServerClient();
         await supabase.auth.exchangeCodeForSession(code)
     }
 
