@@ -14,6 +14,7 @@ export default function AuthForm({ handleSubmit }) {
                     className="login__email"
                     type="email"
                     placeholder="Email address"
+                    name="email"
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
                     required
@@ -24,6 +25,7 @@ export default function AuthForm({ handleSubmit }) {
                 <input
                     className="login__password"
                     placeholder="Password"
+                    name="password"
                     type="password"
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}

@@ -1,7 +1,7 @@
-import { useCreateServerClient } from "./customHooks";
+import { myCreateServerClient } from "./customHooks";
 
 export async function getVans(){
-    const supabase = await useCreateServerClient();
+    const supabase = await myCreateServerClient();
 
     const { data, error } = await supabase.from('vans')
         .select()
@@ -14,7 +14,7 @@ export async function getVans(){
 }
 
 export async function getVan(id){
-    const supabase = await useCreateServerClient();
+    const supabase = await myCreateServerClient();
 
     const { data, error } = await supabase.from('vans')
         .select()
@@ -29,7 +29,7 @@ export async function getVan(id){
 }
 
 export async function getHostVans(){
-    const supabase = await useCreateServerClient();
+    const supabase = await myCreateServerClient();
 
     const { data, error } = await supabase.from('vans')
         .select()

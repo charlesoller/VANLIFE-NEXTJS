@@ -3,23 +3,7 @@ import Link from 'next/link'
 //Custom Components
 import TypeTag from '@/app/components/TypeTag'
 
-//Custom Hooks
-import { useCreateServerClient } from "../../api/customHooks"
-
-async function getVan(id){
-    const supabase = await useCreateServerClient();
-
-    const { data, error } = await supabase.from('vans')
-        .select()
-        .eq('id', id)
-        .single()
-
-    if(error){
-        console.log(error.message)
-    }
-
-    return data;
-}
+import { getVan } from '@/app/api/vanFetching';
 
 export default async function VanDetail({ params }){
     const van = await getVan(params.id)

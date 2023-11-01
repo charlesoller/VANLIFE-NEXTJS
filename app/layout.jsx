@@ -6,7 +6,7 @@ import NavBar from './components/Navbar'
 import Footer from './components/Footer'
 
 // Custom Function
-import { useCreateServerClient } from './api/customHooks'
+import { myCreateServerClient } from './api/customHooks'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,7 +16,7 @@ export const metadata = {
 }
 
 export default async function RootLayout({ children }) {
-  const supabase = await useCreateServerClient();
+  const supabase = await myCreateServerClient();
   const { data } = await supabase.auth.getSession()
 
   return (

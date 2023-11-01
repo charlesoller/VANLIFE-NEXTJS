@@ -2,7 +2,7 @@ import HostNav from "./HostNav"
 import { redirect } from 'next/navigation'
 
 // Custom Hooks
-import { useCreateServerClient } from "../api/customHooks"
+import { myCreateServerClient } from "../api/customHooks"
 
 export const metadata = {
   title: 'Van Life',
@@ -10,9 +10,9 @@ export const metadata = {
 }
 
 export default async function HostLayout({ children }) {
-    const supabase = await useCreateServerClient();
+    const supabase = await myCreateServerClient();
     const { data } = await supabase.auth.getSession()
-    
+
     if(!data.session){
         redirect('/login')
     }

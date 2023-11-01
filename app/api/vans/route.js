@@ -1,16 +1,14 @@
-import { useCreateServerClient } from "../customHooks";
+import { myCreateServerClient } from "../customHooks";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
+    // console.log("in route handler")
     const searchParams = request.nextUrl.searchParams
     const type = searchParams.get('type')
-    console.log(searchParams)
-    console.log(type)
-    const supabase = await useCreateServerClient();
+    const supabase = await myCreateServerClient();
     const { data, error } = await supabase
         .from('vans')
         .select()
-        // .eq('type', type)
 
     return NextResponse.json({ data, error })
   }
