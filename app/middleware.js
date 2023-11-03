@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse } from 'next/server'
+// import { corsHeaders} from '../_shared/cors.ts'
 
 export async function middleware(request) {
   let response = NextResponse.next({
