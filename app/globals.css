@@ -50,14 +50,14 @@ button {
   display: flex;
   justify-content: space-between;
   background: #FFF7ED;
-  padding: 1.25em 1.625em;
+  padding: 1em 1.3em 0em 1.3em;
   color: #4D4D4D;
   font-weight: 600;
   align-items: center;
 }
 
 .header__logo {
-  width: 25%;
+  width: 6rem;
   height: auto;
 }
 
@@ -66,6 +66,34 @@ button {
   justify-content: space-around;
   gap: 2em;
   width: auto;
+}
+
+.logout-button {
+  background: #E17654;
+  color: #FFF;
+  padding: 0.5em 1em;
+  border-radius: 0.2em;
+  margin-bottom: 0.5em;
+}
+
+@media (max-width: 675px){
+  .header {
+    font-size: 0.9rem;
+    padding: 1em 0.8em 0 0.8em;
+  }
+
+  .header__logo{
+    width: 4rem;
+  }
+
+  .header__nav {
+    gap: 1em;
+  }
+
+  .logout-button {
+    font-size: 0.9rem;
+    padding: 0.4em 0.8em;
+  }
 }
 
 /* --------------------- Footer --------------------- */
@@ -91,7 +119,7 @@ button {
   color: #FFF;
   font-weight: 500;
   line-height: 1.5rem;
-  height: 75vh;
+  height: 86vh;
   margin-bottom: 0;
 }
 
@@ -142,6 +170,7 @@ button {
 
 .about__image {
   width: 100%;
+  height: auto;
   margin-bottom: 2em;
 }
 
@@ -187,48 +216,61 @@ button {
 
 /* Thumbnail Version */
 .van--thumbnail {
-  display: grid;
-  grid-template: auto auto auto auto / 80% 20%;
-  grid-template-areas:
-          "image image"
-          "name price"
-          "type price-subtext"
-          "type .....";
   color: #161616;
   margin: 0;
+  /* background: red; */
 }
 
 .van--thumbnail__image {
-  grid-area: image;
   width: 100%;
   border-radius: 0.3125em;
 }
 
 .van--thumbnail__name {
-  grid-area: name;
   font-size: 1.6rem;
   font-weight: 600;
   margin-bottom: 0;
 }
 
 .van--thumbnail__price {
-  grid-area: price;
   font-size: 1.6rem;
   font-weight: 600;
   margin-bottom: 0;
-  justify-self: right;
-  height: min-content;
 }
 
 .van--thumbnail__price-subtext {
-  grid-area: price-subtext;
-  justify-self: right;
   margin-top: 0;
 }
 
 .van--thumbnail__type {
+  font-weight: 500;
   padding: 1em 2em;
   margin-top: 1em;
+}
+
+@media (max-width: 670px){
+  .van--thumbnail__price {
+    font-size: 1.3rem;
+    display: inline;
+  }
+  .van--thumbnail {
+    display: flex;
+  }
+  .van--thumbnail__name {
+    margin: 0.5em 0 0.3em 0;
+  }
+
+  .van--thumbnail__type {
+    margin: 0;
+    display: block;
+    /* font-size: 1rem;
+    padding: 0.5em 1.2em; */
+    margin-top: 1.5em;
+  }
+
+  .van--thumbnail__price-subtext{
+    display: inline;
+  }
 }
 
 /* --------------------- Van Detail Component --------------------- */
@@ -236,13 +278,15 @@ button {
 .van--detail {
   display: flex;
   flex-direction: column;
-  margin: 2em 10em 4em 10em;
+  width: 70%;
+  margin: 0 auto;
   color: #161616;
 }
 
 .van--detail__image {
   order: -2;
   height: 70vh;
+  width: 100%;
   object-fit: cover;
   object-position: 50% 50%;
   margin-bottom: 2em;
@@ -287,7 +331,7 @@ button {
   font-size: 18px;
   font-weight: 700;
   padding: 1.5em 0;
-  margin-top: 2em;
+  margin: 2em 0;
 }
 
 .van--detail__button:hover,
@@ -305,6 +349,30 @@ button {
   text-decoration: underline;
   order: -3;
   margin-bottom: 1em;
+}
+
+@media (max-width: 675px){
+  .van--detail {
+    width: 100%;
+    padding: 0 2em;
+  }
+
+  .van--detail__image {
+    height: auto;
+  }
+
+  .van--detail__name {
+    font-size: 2.5rem;
+  }
+
+  .van--detail__price {
+    font-size: 1.5rem;
+  }
+
+  .van--detail__back {
+    font-size: 0.8rem;
+    margin: 2em 0;
+  }
 }
 
 /* --------------------- Vans Page --------------------- */
@@ -345,10 +413,40 @@ button {
   padding: 2.2em;
 }
 
+@media (max-width: 670px){
+  .vans__title {
+    font-size: 1.5rem;
+  }
+
+  .vans__grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vans__filters {
+    font-size: 0.8rem;
+    margin-bottom: 0;
+    display: block;
+  }
+
+  .vans__filter {
+    margin-right: 0.6em;
+    padding: 0.8em 1.5em;
+  }
+
+  .vans__filters__clear{
+    display: block;
+    margin-top: 1em;
+    /* background: red; */
+  }
+}
+
 /* --------------------- Host Page --------------------- */
 
 .host {
-  padding: 2em 6em;
+  padding: 2em 0;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .host__nav {
@@ -357,6 +455,15 @@ button {
   font-size: 1.2rem;
   font-weight: 700;
   margin-bottom: 3em;
+  /* background: blue; */
+}
+
+@media (max-width: 675px){
+  .host__nav {
+    gap: 0;
+    justify-content: space-between;
+    font-size: 1rem;
+  }
 }
 
 /* --------------------- Host Vans Tab --------------------- */
@@ -375,6 +482,12 @@ button {
 .host-vans__title {
   font-size: 3rem;
   font-weight: 700;
+}
+
+@media (max-width: 675px){
+  .host-vans__grid{
+    /* display: flex; */
+  }
 }
 
 /* --------------------- Host Van Thumbnail Component --------------------- */
@@ -412,6 +525,28 @@ button {
   grid-area: image;
   width: 100%;
   border-radius: 0.4em;
+}
+
+@media (max-width: 675px){
+  .host-van--thumbnail{
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+  }
+
+  .host-van--thumbnail__image {
+    order: -1;
+  }
+
+  .host-van--thumbnail__name {
+    font-size: 2rem;
+    margin-top: 0.7em;
+    align-self: start;
+  }
+
+  .host-van--thumbnail__price {
+    font-size: 1.2rem;
+  }
 }
 
 /* --------------------- Host Van Detail Page --------------------- */
@@ -514,6 +649,22 @@ button {
   border-radius: 0.2em;
 }
 
+@media (max-width: 675px){
+  .host-van--detail__top-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  .host-van--detail__name {
+    font-size: 2rem;
+    align-self: start;
+  }
+  .host-van--detail__type {
+    align-self: start;
+    font-size: 1rem;
+  }
+}
+
 /* --------------------- Page Not Found --------------------- */
 
 .page-not-found {
@@ -540,7 +691,8 @@ button {
 
 .login-container {
   margin: 5em auto;
-  width: 50%;
+  width: 70%;
+  height: 80vh;
   text-align: center;
 }
 
@@ -572,6 +724,8 @@ button {
   padding: 1em;
 }
 
+/* Dash Earnings */
+
 .host-dashboard-earnings {
   background-color: #ffead0;
   padding: 37px 26px;
@@ -601,6 +755,8 @@ button {
   color: #161616;
   font-weight: 900;
 }
+
+/* Reviews */
 
 .host-dashboard-reviews {
   background-color: #ffddb2;
@@ -632,7 +788,16 @@ button {
 }
 
 .host-dashboard-vans {
-  padding: 38px 26px;
+  margin-top: 3em;
+}
+.host-van-single {
+  /* background: blue; */
+  width: 100%;
+  margin-bottom: 2em;
+}
+.host-van-single > img {
+  max-width: 100%;
+  max-height: 60vh;
 }
 
 .host-dashboard-vans > .top {
@@ -765,12 +930,4 @@ img.graph {
 .host-reviews .review-star {
   color: #ff8c38;
   margin-right: 5px;
-}
-
-.logout-button {
-  background: #E17654;
-  color: #FFF;
-  padding: 0.5em 1em;
-  border-radius: 0.2em;
-  margin-bottom: 0.5em;
 }

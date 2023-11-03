@@ -60,7 +60,7 @@ export default function Vans(){
             <h1 className="vans__title">Explore our van options</h1>
             <div className="vans__filters">
                 {filtersElement}
-                {<Link className="vans__filters__clear" href="/vans">Clear filters</Link>}
+                <Link className="vans__filters__clear" href="/vans">{type ? "Clear Filters" : null}</Link>
             </div>
             <div className="vans__grid">
                 <Suspense fallback={<Loading />}>

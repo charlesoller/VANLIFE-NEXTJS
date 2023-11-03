@@ -3,7 +3,6 @@ import Link from "next/link";
 import { BsStarFill } from "react-icons/bs"
 
 import { getHostVans } from "../api/vanFetching";
-import { useCreateServerClient } from "../api/customHooks";
 
 export default async function Dashboard() {
     function renderVanElements(vans) {
@@ -35,7 +34,6 @@ export default async function Dashboard() {
                     <p>Income last <span>30 days</span></p>
                     <h2>$2,260</h2>
                 </div>
-                <Link href="/host/income">Details</Link>
             </section>
             <section className="host-dashboard-reviews">
                 <h2>Review score</h2>
@@ -45,12 +43,10 @@ export default async function Dashboard() {
                 <p>
                     <span>5.0</span>/5
                 </p>
-                <Link href="/host/reviews">Details</Link>
             </section>
             <section className="host-dashboard-vans">
                 <div className="top">
                     <h2>Your listed vans</h2>
-                    <Link href="/host/vans">View all</Link>
                 </div>
                 {
                     !vans
