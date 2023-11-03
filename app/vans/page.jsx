@@ -17,7 +17,8 @@ export default function Vans(){
     useEffect(() => {
         async function getVans() {
             const res = await fetch(`http://localhost:3000/api/vans`, {
-                method: 'GET'
+                method: 'GET',
+                mode: 'no-cors'
             })
 
             const vans = await res.json();
