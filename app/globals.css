@@ -20,13 +20,13 @@ body {
 a {
   text-decoration: none;
   color: #4D4D4D;
+  margin-bottom: 1em;
 }
 
 nav > a:hover,
 .active-link {
   font-weight: bold;
   border-bottom: 1px solid #161616;
-  margin-bottom: 1em;
   color: #161616;
 }
 
@@ -50,7 +50,7 @@ button {
   display: flex;
   justify-content: space-between;
   background: #FFF7ED;
-  padding: 2.25em 1.625em;
+  padding: 1.25em 1.625em;
   color: #4D4D4D;
   font-weight: 600;
   align-items: center;
@@ -251,7 +251,7 @@ button {
 
 .van--detail__name {
   font-size: 3.5rem;
-  /* font-weight: 700; */
+  font-weight: 700;
   margin-bottom: 0;
 }
 
@@ -311,6 +311,7 @@ button {
 
 .vans {
   margin-bottom: 4em;
+  padding: 1em;
 }
 
 .vans__title {
@@ -339,6 +340,7 @@ button {
 .vans__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+  justify-content: center;
   gap: 4em 2em;
   padding: 2.2em;
 }
