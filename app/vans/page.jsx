@@ -18,7 +18,6 @@ export default function Vans(){
         async function getVans() {
             const res = await fetch(`http://localhost:3000/api/vans`, {
                 method: 'GET',
-                mode: 'no-cors'
             })
 
             const vans = await res.json();
