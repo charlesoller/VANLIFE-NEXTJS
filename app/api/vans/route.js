@@ -10,5 +10,5 @@ export async function GET(request) {
         .from('vans')
         .select()
 
-    return NextResponse.json({ data, error }, { headers: corsHeaders })
+    return NextResponse.json({ data, error }, { headers: corsHeaders }, { status: 200})
   }
