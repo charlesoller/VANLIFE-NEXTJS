@@ -1,12 +1,29 @@
 "use client"
 
 import { Suspense, useEffect, useState } from "react";
+import { createBrowserClient } from "@supabase/ssr";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import VanThumbnail from "../components/VanThumbnail";
 import TypeTag from "../components/TypeTag";
 import Loading from "../loading";
 
+async function getVans(){
+    const supabase = createBrowserClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+      )
+
+    const { data, error } = await supabase
+        .from('vans')
+        .select()
+
+    if(error){
+        console.log(error)
+    }
+    console.log(data)
+    return data;
+}
 
 export default function Vans(){
     const searchParams = useSearchParams();
@@ -15,22 +32,13 @@ export default function Vans(){
     const type = searchParams.get('type')
 
     useEffect(() => {
-        async function getVans() {
-            const res = await fetch(`http://localhost:3000/api/vans`, {
-                method: 'GET',
-            })
-
-            const vans = await res.json();
-            if(vans.error){
-                console.log(vans.error)
-            } else {
-                router.refresh();
-                setVans(vans.data)
-            }
+        async function loadVans() {
+            const data = await getVans()
+            setVans(data)
         }
 
-        getVans();
-    }, [])
+        loadVans()
+    }, []);
 
     const vansElement = vans.map(van => {
         const thumbnailEle =
