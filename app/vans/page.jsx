@@ -8,6 +8,7 @@ import VanThumbnail from "../components/VanThumbnail";
 import TypeTag from "../components/TypeTag";
 import Loading from "../loading";
 
+
 async function getVans(){
     const supabase = createBrowserClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -21,7 +22,6 @@ async function getVans(){
     if(error){
         console.log(error)
     }
-    
     return data;
 }
 
