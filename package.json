@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mantine/core": "^7.2.1",
+    "@mantine/dropzone": "^7.2.1",
+    "@mantine/form": "^7.2.1",
+    "@mantine/hooks": "^7.2.1",
     "@supabase/ssr": "^0.0.4",
     "@supabase/supabase-js": "^2.38.4",
     "next": "14.0.0",
@@ -21,7 +25,9 @@
     "autoprefixer": "^10",
     "eslint": "^8",
     "eslint-config-next": "14.0.0",
-    "postcss": "^8",
+    "postcss": "^8.4.31",
+    "postcss-preset-mantine": "^1.9.1",
+    "postcss-simple-vars": "^7.0.1",
     "tailwindcss": "^3"
   }
 }

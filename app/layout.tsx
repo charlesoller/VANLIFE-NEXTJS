@@ -1,6 +1,11 @@
 import { ReactNode } from 'react'
 import { Inter } from 'next/font/google'
+import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+
+//Styles
 import './globals.css'
+import '@mantine/core/styles.css';
+import '@mantine/dropzone/styles.css';
 
 // Custom Componenets
 import NavBar from './components/Navbar'
@@ -24,12 +29,19 @@ export default async function RootLayout({ children }: LayoutProps) {
   const supabase = await myCreateServerClient();
   const { data } = await supabase.auth.getSession()
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <NavBar user={data.session?.user}/>
-          {children}
-        <Footer />
-      </body>
-    </html>
+
+      <html lang="en">
+        <head>
+          <ColorSchemeScript />
+        </head>
+          <body className={inter.className}>
+            <MantineProvider>
+              <NavBar user={data.session?.user}/>
+                {children}
+              <Footer />
+            </MantineProvider>
+          </body>
+      </html>
+
   )
 }
