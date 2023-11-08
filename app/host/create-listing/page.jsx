@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { createBrowserClient } from '@supabase/ssr'
+import { useRouter } from 'next/navigation';
 
 
 import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone';
@@ -14,22 +15,42 @@ const supabase = createBrowserClient(
 )
 
 async function uploadImage(file) {
-    console.log("FLAG", file)
     const {data, error} = await supabase
         .storage
         .from('Images')
-        .upload("test/image.png", file[0])
+        .upload(`${file[0].path}`, file[0])
+
+    if(error){
+        console.log(error)
+    }
 }
 
-async function handleSubmit(form){
-    uploadImage(form.image)
-    console.log(form)
-    // const { error } = await supabase
-    //     .from('vans')
-    //     .insert({ id: 123, name: form.name, description: form.description, type: form.type, imageUrl: null, price: form.price, hostId: 222})
+async function getImageUrl(imageUrl){
+    const {data, error} = await supabase
+        .storage
+        .from('Images')
+        .getPublicUrl(imageUrl)
+
+    if(error){
+        console.log(error)
+    }
+    return data
 }
+
+async function handleSubmit(form, router){
+    uploadImage(form.image)
+    const imageUrl = await getImageUrl(form.image[0].path)
+    const { error } = await supabase
+        .from('vans')
+        .insert({ id: 14, name: form.name, description: form.description, type: form.type.toLowerCase(), imageUrl: imageUrl.publicUrl, price: form.price, hostId: 222})
+
+    router.push('/vans');
+    router.refresh();
+}
+
 
 export default function CreateListing(){
+    const router = useRouter();
     const [files, setFiles] = useState([]);
 
     const previews = files.map((file, index) => {
@@ -50,20 +71,22 @@ export default function CreateListing(){
     return (
         <>
             <h1> List a new van </h1>
-            <form onSubmit={form.onSubmit(values => handleSubmit(values))}>
+            <form onSubmit={form.onSubmit(values => handleSubmit(values, router))}>
                 <Flex
                     direction="column"
-                    gap="lg"
+                    gap="xl"
                 >
                     <TextInput
+                        size='md'
                         radius="xl"
                         label="Van Name"
-                        description="The punchier the name, the more likely someone will rent your van."
+                        description="The punchier the name, the more likely someone is to rent your van."
                         withAsterisk
                         placeholder="Name"
                         {...form.getInputProps('name')}
                     />
                     <Textarea
+                        size='md'
                         radius="xl"
                         label="Van Description"
                         description="Give the renter an idea of what your van's all about."
@@ -72,10 +95,11 @@ export default function CreateListing(){
                         {...form.getInputProps('description')}
                     />
                     <NativeSelect
+                        size = "md"
                         radius="xl"
                         label="Van Type"
-                        description="If you could describe your van in one word..."
                         withAsterisk
+                        description="If you could describe your van in one word..."
                         placeholder="Type"
                         data={["Simple", "Rugged", "Luxury"]}
                         {...form.getInputProps('type')}
@@ -101,6 +125,7 @@ export default function CreateListing(){
                     <Dropzone
                         onDrop={(files) => {
                             form.setFieldValue('image', files)
+                            setFiles(files);
                         }}
                         onReject={(files) => console.log('rejected files', files)}
                         maxSize={3 * 1024 ** 2}
@@ -122,7 +147,7 @@ export default function CreateListing(){
                         {previews}
                     </SimpleGrid>
                     <Space h='md' />
-                    <Button type="submit" variant="filled" color="yellow">Submit</Button>
+                    <Button type="submit" variant="gradient" gradient={{ from: 'yellow', to: 'orange', deg: 90 }} size='xl'>Submit</Button>
                 </Flex>
             </form>
         </>
