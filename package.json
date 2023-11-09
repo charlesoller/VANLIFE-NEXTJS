@@ -9,12 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mantine/carousel": "^7.2.1",
     "@mantine/core": "^7.2.1",
     "@mantine/dropzone": "^7.2.1",
     "@mantine/form": "^7.2.1",
     "@mantine/hooks": "^7.2.1",
     "@supabase/ssr": "^0.0.4",
     "@supabase/supabase-js": "^2.38.4",
+    "embla-carousel-autoplay": "^7.1.0",
+    "embla-carousel-react": "^7.1.0",
     "next": "14.0.0",
     "react": "^18",
     "react-dom": "^18",

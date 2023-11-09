@@ -6,6 +6,7 @@ import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import './globals.css'
 import '@mantine/core/styles.css';
 import '@mantine/dropzone/styles.css';
+import '@mantine/carousel/styles.css';
 
 // Custom Componenets
 import NavBar from './components/Navbar'
@@ -28,6 +29,7 @@ type LayoutProps = {
 export default async function RootLayout({ children }: LayoutProps) {
   const supabase = await myCreateServerClient();
   const { data } = await supabase.auth.getSession()
+
   return (
 
       <html lang="en">

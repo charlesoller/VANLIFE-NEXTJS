@@ -49,7 +49,7 @@ button {
 .header {
   display: flex;
   justify-content: space-between;
-  background: #FFF7ED;
+  /* background: #FFF7ED; */
   padding: 1em 1.3em 0em 1.3em;
   font-weight: 600;
   align-items: center;
