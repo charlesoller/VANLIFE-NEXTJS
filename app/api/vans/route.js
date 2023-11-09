@@ -1,7 +1,5 @@
-import { headers } from "next/headers";
 import { myCreateServerClient } from "../customHooks";
 import { NextResponse } from "next/server";
-import { corsHeaders } from "@/_shared/cors";
 
 export async function GET(request) {
     // console.log("in route handler")
