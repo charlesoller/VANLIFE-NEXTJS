@@ -10,6 +10,7 @@ import '@mantine/carousel/styles.css';
 
 // Custom Componenets
 import NavBar from './components/Navbar'
+import Header from './components/Header'
 import Footer from './components/Footer'
 
 // Custom Function
@@ -38,7 +39,8 @@ export default async function RootLayout({ children }: LayoutProps) {
         </head>
           <body className={inter.className}>
             <MantineProvider>
-              <NavBar user={data.session?.user}/>
+              {/* <NavBar user={data.session?.user}/> */}
+              <Header />
                 {children}
               <Footer />
             </MantineProvider>

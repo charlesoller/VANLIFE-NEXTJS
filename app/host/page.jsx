@@ -6,6 +6,7 @@ import { BsStarFill } from "react-icons/bs"
 import { myCreateServerClient } from "../api/customHooks";
 
 import Card from "../components/CarouselCard";
+import { StatsGroup } from "../components/StatsGroup";
 
 import classes from '../modules/HostDashboard.module.css';
 
@@ -41,8 +42,9 @@ export default async function Dashboard() {
     })
     return (
         <>
-            <section className="host-dashboard-earnings">
-                <div className="info">
+            <section>
+                <StatsGroup />
+                {/* <div className="info">
                     <h1>Welcome!</h1>
                     <p>Income last <span>30 days</span></p>
                     <h2>$2,260</h2>
@@ -55,7 +57,7 @@ export default async function Dashboard() {
 
                 <p>
                     <span>5.0</span>/5
-                </p>
+                </p> */}
             </section>
             <section className="host-dashboard-vans">
                 <div className="top">
