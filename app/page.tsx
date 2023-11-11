@@ -4,7 +4,11 @@ import classes from './modules/Home.module.css';
 import Link from 'next/link'
 import CardsCarousel from './components/Carousel';
 
-export default function Home() {
+import { getVans } from './api/vanFetching'
+
+export default async function Home() {
+  const vans = await getVans();
+
   return (
     <main>
       <div className={classes.hero}>
@@ -27,7 +31,7 @@ export default function Home() {
       </div>
       <div>
         <Container size='xxl' mt='xl' mb='xl'>
-          <CardsCarousel />
+          <CardsCarousel elements={vans}/>
         </Container>
       </div>
     </main>

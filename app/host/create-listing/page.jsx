@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { createBrowserClient } from '@supabase/ssr'
 import { useRouter } from 'next/navigation';
 
+import { nanoid } from 'nanoid'
 
 import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { Group, Flex, Text, Button, Space, TextInput, Textarea, NativeSelect, Slider, SimpleGrid, Image } from '@mantine/core';
@@ -38,16 +39,37 @@ async function getImageUrl(imageUrl){
 }
 
 async function handleSubmit(form, router){
+    const { data } = await supabase.auth.getSession()
+
     uploadImage(form.image)
     const imageUrl = await getImageUrl(form.image[0].path)
+
+    const hostId = await getUserIdByEmail(data.session.user.email)
+
     const { error } = await supabase
         .from('vans')
-        .insert({ id: 14, name: form.name, description: form.description, type: form.type.toLowerCase(), imageUrl: imageUrl.publicUrl, price: form.price, hostId: 222})
+        .insert({ id: nanoid(), name: form.name, description: form.description, type: form.type.toLowerCase(), imageUrl: imageUrl.publicUrl, price: form.price, hostId: hostId})
 
-    router.push('/vans');
-    router.refresh();
+    if(error){
+        console.log("ERROR HERE", error)
+    } else {
+        router.push('/vans');
+        router.refresh();
+    }
 }
 
+async function getUserIdByEmail(email){
+    const { data, error } = await supabase
+        .from('users')
+        .select('email, id')
+        .eq('email', email)
+
+    if(error){
+        console.log(error)
+    }
+
+    return data[0].id
+}
 
 export default function CreateListing(){
     const router = useRouter();

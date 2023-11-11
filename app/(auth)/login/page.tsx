@@ -1,5 +1,7 @@
 "use client"
 
+import { nanoid } from 'nanoid'
+
 import { useRouter } from "next/navigation";
 import { createBrowserClient } from '@supabase/ssr'
 
@@ -39,7 +41,7 @@ async function handleSignup(name: string, email: string, password: string){
 
   const { error: uploadError } = await supabase
       .from('users')
-      .insert({name: name, email: email, password: password})
+      .insert({id: nanoid(), name: name, email: email, password: password})
 
 
   return {loginError, uploadError};
@@ -118,7 +120,7 @@ export default function AuthenticationForm() {
     <Container my={100}>
       <Paper radius="lg" p="xl" withBorder>
         <Text size="xl" fw={500}>
-          Let's get rollin!, {type} with
+          Lets get rollin!, {type} with
         </Text>
 
         <Group grow mb="md" mt="md">

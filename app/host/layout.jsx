@@ -11,8 +11,8 @@ export const metadata = {
 
 export default async function HostLayout({ children }) {
     const supabase = await myCreateServerClient();
-    const { data } = await supabase.auth.getSession()
-
+    const { data } = await supabase.auth.getSession();
+    
     if(!data.session){
         redirect('/login')
     }

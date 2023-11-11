@@ -1,31 +1,44 @@
 import React from "react"
 import Link from "next/link";
-import { BsStarFill } from "react-icons/bs"
 
-import { getHostVans } from "../api/vanFetching";
+import { Flex, Grid } from '@mantine/core'
+import { BsStarFill } from "react-icons/bs"
+import { myCreateServerClient } from "../api/customHooks";
+
+import Card from "../components/CarouselCard";
+
+import classes from '../modules/HostDashboard.module.css';
+
+const supabase = await myCreateServerClient();
 
 export default async function Dashboard() {
-    function renderVanElements(vans) {
-        const hostVansEls = vans.map((van) => (
-            <div className="host-van-single" key={van.id}>
-                <img src={van.imageUrl} alt={`Photo of ${van.name}`} />
-                <div className="host-van-info">
-                    <h3>{van.name}</h3>
-                    <p>${van.price}/day</p>
-                </div>
-                <Link href={`vans/${van.id}`}>View</Link>
-            </div>
-        ))
+    async function getHostVans(){
+        const { data: sessionData, error: sessionError } = await supabase.auth.getSession()
+        if(sessionError) console.log(sessionError)
+        const userEmail = sessionData.session.user.email
 
-        return (
-            <div className="host-vans-list">
-                <section>{hostVansEls}</section>
-            </div>
-        )
+        const {data: userData, error: userError} = await supabase
+            .from('users')
+            .select('id, email')
+            .eq('email', userEmail)
+
+        if(userError) console.log(userError)
+        const userId = userData[0].id
+
+        const {data: vanData, error: vanError} = await supabase
+            .from('vans')
+            .select()
+            .eq('hostId', userId)
+        if(vanError) console.log(vanError)
+
+        return vanData
     }
 
     const vans = await getHostVans();
-
+    // image, title, category
+    const hostVans = vans.map(van => {
+        return <Card key={van.id} image={van.imageUrl} title={van.name} category={van.type}>View your van</Card>
+    })
     return (
         <>
             <section className="host-dashboard-earnings">
@@ -48,15 +61,9 @@ export default async function Dashboard() {
                 <div className="top">
                     <h2>Your listed vans</h2>
                 </div>
-                {
-                    !vans
-                    ? <h1>Loading...</h1>
-                    : (
-                        <>
-                            {renderVanElements(vans)}
-                        </>
-                    )
-                }
+                <div className={classes.grid}>
+                    {hostVans}
+                </div>
             </section>
         </>
     )

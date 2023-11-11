@@ -23,3 +23,12 @@
     font-weight: 700;
     text-transform: uppercase;
   }
+
+  /* .image {
+    z-index: -1;
+    position: absolute;
+    margin: 0;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+  } */
