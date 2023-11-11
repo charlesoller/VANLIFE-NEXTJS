@@ -39,8 +39,7 @@ export default async function RootLayout({ children }: LayoutProps) {
         </head>
           <body className={inter.className}>
             <MantineProvider>
-              {/* <NavBar user={data.session?.user}/> */}
-              <Header />
+              <Header user={data.session?.user}/>
                 {children}
               <Footer />
             </MantineProvider>

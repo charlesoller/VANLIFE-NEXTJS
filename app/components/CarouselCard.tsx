@@ -29,7 +29,7 @@ export default function Card({ image, title, category, children }: CardProps) {
           </Title>
         </div>
         <Link href="/vans">
-          <Button variant="gradient" gradient={{ from: 'yellow', to: 'orange', deg: 90 }}>
+          <Button variant="gradient" gradient={{ from: 'yellow', to: 'orange', deg: 90 }} radius='lg'>
               {children}
           </Button>
         </Link>
