@@ -27,18 +27,19 @@ import {
                     </Link>
                 </Group>
 
-
-                <Group>
-                    <Link href="/login" className={classes.auth}>
-                        <Button variant="default">Log in</Button>
-                    </Link>
-                    <Link href="/login" className={classes.auth}>
-                        <Button color="yellow">Sign up</Button>
-                    </Link>
-                </Group>
-
-                <UserMenu />
-
+                {
+                    user ?
+                        <UserMenu user={user}/>
+                    :
+                    <Group>
+                        <Link href="/login" className={classes.auth}>
+                            <Button variant="default">Log in</Button>
+                        </Link>
+                        <Link href="/login" className={classes.auth}>
+                            <Button color="yellow">Sign up</Button>
+                        </Link>
+                    </Group>
+                }
           </Group>
         </header>
     );

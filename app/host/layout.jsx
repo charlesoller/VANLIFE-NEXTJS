@@ -1,8 +1,10 @@
-import HostNav from "./HostNav"
+// import HostNav from "./HostNav"
 import { redirect } from 'next/navigation'
 
 // Custom Hooks
 import { myCreateServerClient } from "../api/customHooks"
+
+import HostNav from "../components/HostNav"
 
 export const metadata = {
   title: 'Van Life',
@@ -12,15 +14,17 @@ export const metadata = {
 export default async function HostLayout({ children }) {
     const supabase = await myCreateServerClient();
     const { data } = await supabase.auth.getSession();
-    
+
     if(!data.session){
         redirect('/login')
     }
 
     return (
-    <div className="host">
-        <HostNav />
-        {children}
-    </div>
+        <div className="host">
+            <HostNav />
+            <div className='host__content'>
+                {children}
+            </div>
+        </div>
     )
 }

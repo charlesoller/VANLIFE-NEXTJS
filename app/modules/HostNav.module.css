@@ -1,0 +1,37 @@
+.navbar {
+    width: rem(80px);
+    height: auto;
+    padding: var(--mantine-spacing-md);
+    display: flex;
+    flex-direction: column;
+    /* background-color: var(--mantine-color-orange-filled); */
+    background-image: linear-gradient(var(--mantine-color-orange-6), var(--mantine-color-yellow-5))
+  }
+
+  .navbarMain {
+    flex: 1;
+    margin-top: rem(50px);
+  }
+
+  .link {
+    width: rem(50px);
+    height: rem(50px);
+    border-radius: var(--mantine-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--mantine-color-white);
+
+    &:hover {
+      background-color: var(--mantine-color-orange-7);
+    }
+
+    &[data-active] {
+      &,
+      &:hover {
+        box-shadow: var(--mantine-shadow-sm);
+        background-color: var(--mantine-color-white);
+        color: var(--mantine-color-orange-6);
+      }
+    }
+  }

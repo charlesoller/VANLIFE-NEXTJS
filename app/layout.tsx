@@ -9,7 +9,6 @@ import '@mantine/dropzone/styles.css';
 import '@mantine/carousel/styles.css';
 
 // Custom Componenets
-import NavBar from './components/Navbar'
 import Header from './components/Header'
 import Footer from './components/Footer'
 
@@ -27,10 +26,18 @@ type LayoutProps = {
   children: ReactNode
 }
 
+import { getCurrentUserByEmail } from './api/api';
+
 export default async function RootLayout({ children }: LayoutProps) {
   const supabase = await myCreateServerClient();
   const { data } = await supabase.auth.getSession()
+  let user: {};
 
+  if(data.session?.user){
+    user = await getCurrentUserByEmail(data.session.user.email)
+  }
+
+  console.log(user)
   return (
 
       <html lang="en">
@@ -39,7 +46,7 @@ export default async function RootLayout({ children }: LayoutProps) {
         </head>
           <body className={inter.className}>
             <MantineProvider>
-              <Header user={data.session?.user}/>
+              <Header user={user && user[0]}/>
                 {children}
               <Footer />
             </MantineProvider>

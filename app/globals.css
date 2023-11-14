@@ -14,7 +14,6 @@ html, body {
 body {
   font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 16px;
-  background: #FFF7ED;
 }
 
 a {
@@ -443,27 +442,17 @@ button {
 /* --------------------- Host Page --------------------- */
 
 .host {
-  padding: 2em 0;
-  width: 80%;
+  width: 100%;
+  height: auto;
   margin: 0 auto;
-}
-
-.host__nav {
+  position: relative;
   display: flex;
-  gap: 2em;
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 3em;
-  /* background: blue; */
 }
 
-@media (max-width: 675px){
-  .host__nav {
-    gap: 0;
-    justify-content: space-between;
-    font-size: 1rem;
-  }
+.host__content {
+  padding: 2em 4em;
 }
+
 
 /* --------------------- Host Vans Tab --------------------- */
 

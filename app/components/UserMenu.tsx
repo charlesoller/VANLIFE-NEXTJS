@@ -4,18 +4,37 @@ import { Menu, Group, Text, Avatar, useMantineTheme, ActionIcon, rem } from '@ma
 import {
   IconLogout,
   IconHeart,
-  IconStar,
+  IconPeace,
   IconMessage,
   IconSettings,
-  IconPlayerPause,
-  IconTrash,
-  IconSwitchHorizontal,
   IconChevronRight,
-  IconDots,
+  IconUserCircle,
+  IconHome
 } from '@tabler/icons-react';
 
-export function UserMenu() {
+import { useRouter } from "next/navigation";
+import { createBrowserClient } from '@supabase/ssr';
+
+export function UserMenu({ user }) {
   const theme = useMantineTheme();
+  const router = useRouter();
+
+  // Functions
+  const handleLogout = async () => {
+    const supabase = createBrowserClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+      )
+
+    const { error } = await supabase.auth.signOut();
+    if(!error){
+        router.push("/login")
+        router.refresh()
+    } else {
+        console.log(error)
+    }
+  }
+
   return (
     <Group justify="center">
       <Menu
@@ -27,7 +46,7 @@ export function UserMenu() {
       >
         <Menu.Target>
           <ActionIcon variant="default">
-            <IconDots style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+            <IconUserCircle style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
           </ActionIcon>
         </Menu.Target>
         <Menu.Dropdown>
@@ -39,41 +58,45 @@ export function UserMenu() {
             <Group>
               <Avatar
                 radius="xl"
-                src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
+                src={user.photo}
+                color="yellow"
               />
 
               <div>
-                <Text fw={500}>Nancy Eggshacker</Text>
+                <Text fw={500}>{user.name}</Text>
                 <Text size="xs" c="dimmed">
-                  neggshaker@mantine.dev
+                  {user.email}
                 </Text>
               </div>
             </Group>
           </Menu.Item>
 
           <Menu.Divider />
+            <Menu.Item
+              leftSection={
+                <IconHome
+                  style={{ width: rem(16), height: rem(16) }}
+                  stroke={1.5}
+                  color={theme.colors.yellow[6]}
+                />
+              }
+              component='a'
+              href="/host"
+            >
+              Dashboard
+            </Menu.Item>
+          <Menu.Divider />
 
           <Menu.Item
             leftSection={
-              <IconHeart
-                style={{ width: rem(16), height: rem(16) }}
-                stroke={1.5}
-                color={theme.colors.red[6]}
-              />
-            }
-          >
-            Liked posts
-          </Menu.Item>
-          <Menu.Item
-            leftSection={
-              <IconStar
+              <IconPeace
                 style={{ width: rem(16), height: rem(16) }}
                 stroke={1.5}
                 color={theme.colors.yellow[6]}
               />
             }
           >
-            Saved posts
+            Saved Listings
           </Menu.Item>
           <Menu.Item
             leftSection={
@@ -94,33 +117,10 @@ export function UserMenu() {
             Account settings
           </Menu.Item>
           <Menu.Item
-            leftSection={
-              <IconSwitchHorizontal style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
-            }
-          >
-            Change account
-          </Menu.Item>
-          <Menu.Item
             leftSection={<IconLogout style={{ width: rem(16), height: rem(16) }} stroke={1.5} />}
+            onClick={handleLogout}
           >
             Logout
-          </Menu.Item>
-
-          <Menu.Divider />
-
-          <Menu.Label>Danger zone</Menu.Label>
-          <Menu.Item
-            leftSection={
-              <IconPlayerPause style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
-            }
-          >
-            Pause subscription
-          </Menu.Item>
-          <Menu.Item
-            color="red"
-            leftSection={<IconTrash style={{ width: rem(16), height: rem(16) }} stroke={1.5} />}
-          >
-            Delete account
           </Menu.Item>
         </Menu.Dropdown>
       </Menu>
