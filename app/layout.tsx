@@ -26,7 +26,7 @@ type LayoutProps = {
   children: ReactNode
 }
 
-import { getCurrentUserByEmail } from './api/api';
+import { getCurrentUserByEmail } from './api/serverActions';
 
 export default async function RootLayout({ children }: LayoutProps) {
   const supabase = await myCreateServerClient();
