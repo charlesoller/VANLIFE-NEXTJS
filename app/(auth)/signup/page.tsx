@@ -22,7 +22,7 @@ import {
 } from '@mantine/core';
 
 import { GoogleButton } from '../../components/GoogleButton';
-import { handleSignup } from '../authActions';
+import { handleSignup, handleSignInWithGoogle } from '../authActions';
 
 export default function AuthenticationForm() {
   const router = useRouter();
@@ -65,11 +65,11 @@ export default function AuthenticationForm() {
     <Container my={100}>
       <Paper radius="lg" p="xl" withBorder>
         <Text size="xl" fw={500}>
-          Lets get rollin', sign up with
+          Lets get rollin!, sign up with
         </Text>
 
         <Group grow mb="md" mt="md">
-          <GoogleButton radius="xl" onClick={() => console.log("FIX ME")}>Google</GoogleButton>
+          <GoogleButton radius="xl">Google</GoogleButton>
         </Group>
 
         <Divider label="Or continue with email" labelPosition="center" my="lg" />
@@ -121,7 +121,7 @@ export default function AuthenticationForm() {
               placeholder="Confirm your password"
               value={form.values.confirmPassword}
               onChange={(event) => form.setFieldValue('confirmPassword', event.currentTarget.value)}
-              error={form.errors.confirmPassword && "Your passwords don't match!"}
+              error={form.errors.confirmPassword && "Your passwords do not match!"}
               radius="md"
             />
 

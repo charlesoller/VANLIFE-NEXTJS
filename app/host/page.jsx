@@ -1,8 +1,5 @@
 import React from "react"
-import Link from "next/link";
 
-import { Flex, Grid } from '@mantine/core'
-import { BsStarFill } from "react-icons/bs"
 import { myCreateServerClient } from "../api/customHooks";
 
 import Card from "../components/CarouselCard";
@@ -43,20 +40,6 @@ export default async function Dashboard() {
         <>
             <section>
                 <StatsGroup />
-                {/* <div className="info">
-                    <h1>Welcome!</h1>
-                    <p>Income last <span>30 days</span></p>
-                    <h2>$2,260</h2>
-                </div>
-            </section>
-            <section className="host-dashboard-reviews">
-                <h2>Review score</h2>
-
-                <BsStarFill className="star" />
-
-                <p>
-                    <span>5.0</span>/5
-                </p> */}
             </section>
             <section className="host-dashboard-vans">
                 <div className="top">

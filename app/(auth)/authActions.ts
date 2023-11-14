@@ -36,17 +36,24 @@ export async function handleLogin(email: string, password: string){
     return error
 }
 
-// async function handleGoogle(){
-//   console.log("logged in with google")
-//   const {data, error } = await supabase.auth.signInWithOAuth({
-//     provider: 'google',
-//     options: {
-//       queryParams: {
-//         access_type: 'offline',
-//         prompt: 'consent',
-//       },
-//     },
-//   })
 
-//   console.log("DATA", data)
-// }
+
+export async function handleSignInWithGoogle() {
+    console.log("FIX ME")
+    // const { data, error } = await supabase.auth.signInWithOAuth({
+    //     provider: 'google',
+    //     options: {
+    //         queryParams: {
+    //         access_type: 'offline',
+    //         prompt: 'consent',
+    //         },
+    //     },
+    // })
+
+    // if(data){
+    //     console.log(data)
+    // }
+    // if(error){
+    //     console.log(error)
+    // }
+  }

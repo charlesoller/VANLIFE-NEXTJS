@@ -20,10 +20,11 @@ import {
 } from '@mantine/core';
 
 import { GoogleButton } from '../../components/GoogleButton';
-import { handleLogin } from "../authActions";
+import { handleLogin, handleSignInWithGoogle } from "../authActions";
 
 
 export default function AuthenticationForm() {
+
   const router = useRouter();
 
   async function handleSubmit( form : UseFormReturnType<FormValues> ){
@@ -55,11 +56,11 @@ export default function AuthenticationForm() {
     <Container my={100}>
       <Paper radius="lg" p="xl" withBorder>
         <Text size="xl" fw={500}>
-          Lets get rollin', login with
+          Lets get rollin!, login with
         </Text>
 
         <Group grow mb="md" mt="md">
-          <GoogleButton radius="xl" onClick={() => console.log("FIX ME")}>Google</GoogleButton>
+          <GoogleButton radius="xl">Google</GoogleButton>
         </Group>
 
         <Divider label="Or continue with email" labelPosition="center" my="lg" />
@@ -90,7 +91,7 @@ export default function AuthenticationForm() {
 
           <Group justify="space-between" mt="xl">
             <Anchor href="/signup" c="dimmed" size="xs">
-                Don't have an account? Register
+                Need an account? Register
             </Anchor>
             <Button type="submit" radius="xl" color='yellow'>
               Login

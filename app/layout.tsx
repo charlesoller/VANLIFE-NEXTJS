@@ -32,7 +32,7 @@ export default async function RootLayout({ children }: LayoutProps) {
   const supabase = await myCreateServerClient();
   const { data } = await supabase.auth.getSession()
   let user: {};
-
+  console.log(data)
   if(data.session?.user){
     user = await getCurrentUserByEmail(data.session.user.email)
   }
