@@ -12,15 +12,12 @@ import {
 } from '@tabler/icons-react';
 import classes from '../modules/HostNav.module.css'
 
-import { usePathname, useRouter } from 'next/navigation';
-import { handleLogout } from '../api/clientActions';
-
 interface NavbarLinkProps {
   icon: typeof IconHome2;
   label: string;
-  path?: string;
   active?: boolean;
   onClick?(): void;
+  path: string;
 }
 
 function NavbarLink({ icon: Icon, label, active, onClick, path }: NavbarLinkProps) {
@@ -38,43 +35,32 @@ const pages = [
   { icon: IconGauge, label: 'Manage Listings', path:'/host/create-listing' },
   { icon: IconDeviceDesktopAnalytics, label: 'Analytics', path: '/host/income' },
   { icon: IconMessageDots, label: 'Reviews', path: '/host/reviews'},
-  { icon: IconSettings, label: 'Settings', path: '/host/settings' }
+  { icon: IconSettings, label: 'Settings', path: '/' }
 ];
 
 export default function HostNav() {
-    const pathname = usePathname();
-    const router = useRouter();
+  const [active, setActive] = useState(0);
 
-    async function logoutAction(){
-      const error = await handleLogout();
-
-      if(!error){
-        router.push("/login")
-        router.refresh()
-      } else {
-        console.log(error)
-      }
-    }
-
-    const links = pages.map((link) => (
+  const links = pages.map((link, index) => (
     <NavbarLink
-        {...link}
-        key={link.label}
-        active={pathname === link.path}
+      {...link}
+      key={link.label}
+      active={index === active}
+      onClick={() => setActive(index)}
     />
-    ));
+  ));
 
-    return (
+  return (
     <nav className={classes.navbar}>
-        <div className={classes.navbarMain}>
+      <div className={classes.navbarMain}>
         <Stack justify="center" gap={0}>
-            {links}
+          {links}
         </Stack>
-        </div>
+      </div>
 
-        <Stack justify="center" gap={0}>
-        <NavbarLink icon={IconLogout} label="Logout" onClick={logoutAction}/>
-        </Stack>
+      <Stack justify="center" gap={0}>
+        <NavbarLink icon={IconLogout} label="Logout" />
+      </Stack>
     </nav>
-    );
+  );
 }

@@ -12,21 +12,26 @@ import {
   IconHome
 } from '@tabler/icons-react';
 
-import { handleLogout } from '../api/clientActions';
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
+import { createBrowserClient } from '@supabase/ssr';
 
 export function UserMenu({ user }) {
   const theme = useMantineTheme();
   const router = useRouter();
 
-  async function logoutAction(){
-    const error = await handleLogout();
+  // Functions
+  const handleLogout = async () => {
+    const supabase = createBrowserClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+      )
 
+    const { error } = await supabase.auth.signOut();
     if(!error){
-      router.push("/login")
-      router.refresh()
+        router.push("/login")
+        router.refresh()
     } else {
-      console.log(error)
+        console.log(error)
     }
   }
 
@@ -58,7 +63,7 @@ export function UserMenu({ user }) {
               />
 
               <div>
-                <Text fw={500}>{user.first_name}</Text>
+                <Text fw={500}>{user.name}</Text>
                 <Text size="xs" c="dimmed">
                   {user.email}
                 </Text>
@@ -113,7 +118,7 @@ export function UserMenu({ user }) {
           </Menu.Item>
           <Menu.Item
             leftSection={<IconLogout style={{ width: rem(16), height: rem(16) }} stroke={1.5} />}
-            onClick={logoutAction}
+            onClick={handleLogout}
           >
             Logout
           </Menu.Item>

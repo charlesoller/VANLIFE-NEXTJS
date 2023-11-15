@@ -35,7 +35,7 @@ import {
                         <Link href="/login" className={classes.auth}>
                             <Button variant="default">Log in</Button>
                         </Link>
-                        <Link href="/signup" className={classes.auth}>
+                        <Link href="/login" className={classes.auth}>
                             <Button color="yellow">Sign up</Button>
                         </Link>
                     </Group>

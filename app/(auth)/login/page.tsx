@@ -1,6 +1,9 @@
 "use client"
 
+import { nanoid } from 'nanoid'
+
 import { useRouter } from "next/navigation";
+import { createBrowserClient } from '@supabase/ssr'
 
 import { useToggle, upperFirst } from '@mantine/hooks';
 import { useForm, UseFormReturnType } from '@mantine/form';
@@ -20,7 +23,7 @@ import {
 } from '@mantine/core';
 
 import { GoogleButton } from '../../components/GoogleButton';
-import { handleLogin, handleSignInWithGoogle } from "../authActions";
+import { handleLogin } from "../authActions";
 
 
 export default function AuthenticationForm() {
@@ -28,11 +31,22 @@ export default function AuthenticationForm() {
   const router = useRouter();
 
   async function handleSubmit( form : UseFormReturnType<FormValues> ){
-    const error = await handleLogin(form.values.email, form.values.password);
-    if (error) console.log(error.message)
-    else {
-      router.push('/host')
-      router.refresh();
+
+
+    if (type === 'register'){
+      const {loginError, uploadError} = await handleSignup(form.values.name, form.values.email, form.values.password);
+
+      if (loginError) console.log(loginError.message)
+      else if (uploadError) console.log(uploadError.message)
+      else router.push('/verify')
+
+    } else {
+      const error = await handleLogin(form.values.email, form.values.password);
+      if (error) console.log(error.message)
+      else {
+        router.push('/host')
+        router.refresh();
+      }
     }
   }
 
@@ -43,20 +57,26 @@ export default function AuthenticationForm() {
     terms: boolean;
   }
 
+  const [type, toggle] = useToggle(['login', 'register']);
   const form = useForm<FormValues>({
     initialValues: {
       email: '',
       name: '',
       password: '',
       terms: true,
-    }
+    },
+
+    validate: {
+      email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),
+      password: (val) => (val.length <= 6 ? 'Password should include at least 6 characters' : null),
+    },
   });
 
   return (
     <Container my={100}>
       <Paper radius="lg" p="xl" withBorder>
         <Text size="xl" fw={500}>
-          Lets get rollin!, login with
+          Lets get rollin', login with
         </Text>
 
         <Group grow mb="md" mt="md">
@@ -67,6 +87,15 @@ export default function AuthenticationForm() {
 
         <form onSubmit={form.onSubmit(() => handleSubmit(form))}>
           <Stack>
+            {type === 'register' && (
+              <TextInput
+                label="Name"
+                placeholder="Your name"
+                value={form.values.name}
+                onChange={(event) => form.setFieldValue('name', event.currentTarget.value)}
+                radius="md"
+              />
+            )}
 
             <TextInput
               required
@@ -87,14 +116,23 @@ export default function AuthenticationForm() {
               error={form.errors.password && 'Password should include at least 6 characters'}
               radius="md"
             />
+
+            {type === 'register' && (
+              <Checkbox
+                required
+                label="I accept terms and conditions"
+                checked={form.values.terms}
+                onChange={(event) => form.setFieldValue('terms', event.currentTarget.checked)}
+              />
+            )}
           </Stack>
 
           <Group justify="space-between" mt="xl">
             <Anchor href="/signup" c="dimmed" size="xs">
-                Need an account? Register
+                Don't have an account? Register
             </Anchor>
             <Button type="submit" radius="xl" color='yellow'>
-              Login
+              {upperFirst(type)}
             </Button>
           </Group>
         </form>
