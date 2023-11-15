@@ -1,7 +1,9 @@
 "use client"
 
-import { useState } from 'react';
 import { Tooltip, UnstyledButton, Stack, rem } from '@mantine/core';
+
+import { usePathname } from 'next/navigation';
+
 import {
   IconHome2,
   IconGauge,
@@ -39,14 +41,13 @@ const pages = [
 ];
 
 export default function HostNav() {
-  const [active, setActive] = useState(0);
+  const pathName = usePathname();
 
-  const links = pages.map((link, index) => (
+  const links = pages.map(link => (
     <NavbarLink
       {...link}
       key={link.label}
-      active={index === active}
-      onClick={() => setActive(index)}
+      active={pathName === link.path}
     />
   ));
 
