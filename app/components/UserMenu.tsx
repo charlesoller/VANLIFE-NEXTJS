@@ -63,7 +63,7 @@ export function UserMenu({ user }) {
               />
 
               <div>
-                <Text fw={500}>{user.name}</Text>
+                <Text fw={500}>{user.first_name}</Text>
                 <Text size="xs" c="dimmed">
                   {user.email}
                 </Text>

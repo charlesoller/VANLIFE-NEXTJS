@@ -35,7 +35,6 @@ export default async function RootLayout({ children }: LayoutProps) {
   if(data.session?.user){
     user = await getCurrentUserByEmail(data.session.user.email)
   }
-
   return (
 
       <html lang="en">

@@ -23,7 +23,6 @@ export async function handleSignup(firstName: string, lastName: string, email: s
         .from('users')
         .insert({id: nanoid(), first_name: firstName, last_name: lastName, email: email, password: password})
 
-
     return {loginError, uploadError};
 }
 
@@ -32,28 +31,22 @@ export async function handleLogin(email: string, password: string){
         email: email,
         password: password
     })
-
+    
     return {data, error}
 }
 
 
 
 export async function handleSignInWithGoogle() {
-    console.log("FIX ME")
-    // const { data, error } = await supabase.auth.signInWithOAuth({
-    //     provider: 'google',
-    //     options: {
-    //         queryParams: {
-    //         access_type: 'offline',
-    //         prompt: 'consent',
-    //         },
-    //     },
-    // })
+    const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `http://localhost:3000/auth/callback`,
+          },
+      })
 
-    // if(data){
-    //     console.log(data)
-    // }
-    // if(error){
-    //     console.log(error)
-    // }
-  }
+    if(error){
+        console.log(error)
+    }
+
+}

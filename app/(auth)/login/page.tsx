@@ -28,9 +28,8 @@ export default function AuthenticationForm() {
   async function handleSubmit( form : UseFormReturnType<FormValues> ){
     const {data, error} = await handleLogin(form.values.email, form.values.password);
     if (error) console.log(error.message)
+    
     else {
-      console.log(data)
-
       router.push('/host')
       router.refresh();
     }

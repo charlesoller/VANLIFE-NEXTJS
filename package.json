@@ -36,5 +36,10 @@
     "postcss-preset-mantine": "^1.9.1",
     "postcss-simple-vars": "^7.0.1",
     "tailwindcss": "^3"
+  },
+  "overrides": {
+    "@supabase/supabase-js": {
+      "@supabase/gotrue-js": "2.43.1"
+    }
   }
 }
