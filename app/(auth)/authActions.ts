@@ -29,8 +29,8 @@ export async function handleSignup(firstName: string, lastName: string, email: s
 
 export async function handleLogin(email: string, password: string){
     const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password
+        email: email,
+        password: password
     })
 
     return error
