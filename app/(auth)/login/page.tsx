@@ -52,7 +52,7 @@ export default function AuthenticationForm() {
     <Container my={100}>
       <Paper radius="lg" p="xl" withBorder>
         <Text size="xl" fw={500}>
-          Lets get rollin', login with
+          Lets get rollin!, login with
         </Text>
 
         <Group grow mb="md" mt="md">
@@ -86,7 +86,7 @@ export default function AuthenticationForm() {
 
           <Group justify="space-between" mt="xl">
             <Anchor href="/signup" c="dimmed" size="xs">
-                Don't have an account? Register
+                Need an account? Register
             </Anchor>
             <Button type="submit" radius="xl" color='yellow'>
               Login

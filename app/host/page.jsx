@@ -7,9 +7,10 @@ import { StatsGroup } from "../components/StatsGroup";
 
 import classes from '../modules/HostDashboard.module.css';
 
-const supabase = await myCreateServerClient();
 
 export default async function Dashboard() {
+    const supabase = await myCreateServerClient();
+
     async function getHostVans(){
         const { data: sessionData, error: sessionError } = await supabase.auth.getSession()
         if(sessionError) console.log(sessionError)
@@ -33,6 +34,7 @@ export default async function Dashboard() {
     }
 
     const vans = await getHostVans();
+
     const hostVans = vans.map(van => {
         return <Card key={van.id} image={van.imageUrl} title={van.name} category={van.type}>View your van</Card>
     })

@@ -19,7 +19,7 @@ interface NavbarLinkProps {
   label: string;
   active?: boolean;
   onClick?(): void;
-  path: string;
+  path?: string;
 }
 
 function NavbarLink({ icon: Icon, label, active, onClick, path }: NavbarLinkProps) {
