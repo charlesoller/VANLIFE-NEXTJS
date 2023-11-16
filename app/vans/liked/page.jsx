@@ -47,15 +47,17 @@ export default function LikedListings(){
     }, [])
 
     let vanElements = vans.map(van => (
-        <Link className="van--thumbnail" href={`/vans/${van.id}`} key={ van.id }>
+        // <Link className="van--thumbnail" href={`/vans/${van.id}`} key={ van.id }>
             <Card
+                key={ van.id }
+                id={ van.id }
                 image={van.imageUrl}
                 title={van.name}
                 category={van.type}
             >
                 Rent this van
             </Card>
-        </Link>
+        // </Link>
     ))
 
     return (

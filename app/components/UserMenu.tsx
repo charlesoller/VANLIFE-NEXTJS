@@ -4,12 +4,12 @@ import { Menu, Group, Text, Avatar, useMantineTheme, ActionIcon, rem } from '@ma
 import {
   IconLogout,
   IconHeart,
-  IconPeace,
+  IconGauge,
   IconMessage,
   IconSettings,
   IconChevronRight,
   IconUserCircle,
-  IconHome
+  IconHome2
 } from '@tabler/icons-react';
 
 import { useRouter } from "next/navigation";
@@ -83,7 +83,7 @@ export function UserMenu({ user }) {
           <Menu.Divider />
             <Menu.Item
               leftSection={
-                <IconHome
+                <IconHome2
                   style={{ width: rem(16), height: rem(16) }}
                   stroke={1.5}
                   color={theme.colors.yellow[6]}
@@ -94,11 +94,24 @@ export function UserMenu({ user }) {
             >
               Dashboard
             </Menu.Item>
+            <Menu.Item
+              leftSection={
+                <IconGauge
+                  style={{ width: rem(16), height: rem(16) }}
+                  stroke={1.5}
+                  color={theme.colors.yellow[6]}
+                />
+              }
+              component='a'
+              href="/host/create-listing"
+            >
+              Manage Listings
+            </Menu.Item>
           <Menu.Divider />
 
           <Menu.Item
             leftSection={
-              <IconPeace
+              <IconHeart
                 style={{ width: rem(16), height: rem(16) }}
                 stroke={1.5}
                 color={theme.colors.yellow[6]}

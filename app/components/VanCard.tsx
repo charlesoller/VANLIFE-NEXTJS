@@ -1,6 +1,5 @@
 import { Paper, Text, Title, Button, useMantineTheme, rem, Container } from '@mantine/core';
 import Link from 'next/link';
-import Image from 'next/image';
 import classes from '../modules/Carousel.module.css';
 
 interface CardProps {
@@ -8,9 +7,10 @@ interface CardProps {
     title: string;
     category: string;
     children: string;
+    id: string
   }
 
-export default function Card({ image, title, category, children }: CardProps) {
+export default function Card({ image, title, category, children, id }: CardProps) {
 
     return (
       <Paper
@@ -28,7 +28,7 @@ export default function Card({ image, title, category, children }: CardProps) {
             {title}
           </Title>
         </div>
-        <Link href="/vans">
+        <Link href={`/vans/${id}`}>
           <Button variant="gradient" gradient={{ from: 'yellow', to: 'orange', deg: 90 }} radius='lg'>
               {children}
           </Button>

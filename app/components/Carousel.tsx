@@ -30,8 +30,9 @@ export default function CardsCarousel({ elements }) {
     // const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
 
     const slides = elements.map(van => (
-        <Carousel.Slide key={van.name}>
+        <Carousel.Slide key={van.id}>
             <Card
+                id={ van.id }
                 image={van.imageUrl}
                 title={van.name}
                 category={van.type}
