@@ -6,7 +6,7 @@ import { useMantineTheme } from '@mantine/core';
 
 import { Suspense, useRef, useState, useEffect } from 'react';
 
-import Card from './CarouselCard';
+import Card from './VanCard';
 
 
 export default function CardsCarousel({ elements }) {

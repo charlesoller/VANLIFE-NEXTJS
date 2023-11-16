@@ -9,6 +9,7 @@ import { createBrowserClient } from "@supabase/ssr";
 export default function LikeButton({ vanId }){
     const theme = useMantineTheme();
     const [selected, setSelected] = useState(false)
+    const [disabled, setDisabled] = useState(false)
 
     useEffect(() => {
         async function isLiked(){
@@ -45,8 +46,12 @@ export default function LikeButton({ vanId }){
     },[])
 
 
-    async function handleClick(){
+    async function handleClick(event){
+        event.preventDefault();
         setSelected(prevColor => !prevColor)
+
+        setDisabled(true)
+        setTimeout(() => setDisabled(false), 1000)
 
         const supabase = createBrowserClient(
             process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -92,7 +97,7 @@ export default function LikeButton({ vanId }){
 
     return (
         <Tooltip label={selected ? "Remove from Liked" : "Add to Liked"}>
-            <ActionIcon onClick={handleClick} style={{ width: rem(52), height: rem(52)}} variant="transparent" className={classes.peace}>
+            <ActionIcon onClick={handleClick} style={{ width: rem(52), height: rem(52) }} variant="transparent" disabled={disabled} className={classes.like}>
                 {
                     selected ?
                     <IconHeartFilled

@@ -43,7 +43,7 @@ export default function Vans(){
 
     const vansElement = vans.map(van => {
         const thumbnailEle =
-            // <Link className="van--thumbnail" href={`/vans/${van.id}`} key={ van.id }>
+            <Link className="van--thumbnail" href={`/vans/${van.id}`} key={ van.id }>
                 <ExploreVanCard
                     id={ van.id }
                     name={ van.name }
@@ -52,7 +52,7 @@ export default function Vans(){
                     type={ van.type }
                     key={ van.id }
                 />
-            // </Link>
+            </Link>
         return type ? van.type === type ? thumbnailEle : null : thumbnailEle;
     })
 

@@ -2,7 +2,7 @@ import React from "react"
 
 import { myCreateServerClient } from "../api/customHooks";
 
-import Card from "../components/CarouselCard";
+import Card from "../components/VanCard";
 import { StatsGroup } from "../components/StatsGroup";
 
 import classes from '../modules/HostDashboard.module.css';

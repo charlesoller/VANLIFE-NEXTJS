@@ -10,15 +10,25 @@
     }
   }
 
-  .peace {
+  .like {
     position: absolute;
     top: 2%;
     right: 2%;
     z-index: 2;
   }
+
+  .like {
+    &:disabled,
+    &[data-disabled] {
+      background-color: transparent;
+      cursor: pointer;
+    }
+  }
+
   .test {
     background: red;
   }
+
   .image {
     position: absolute;
     inset: 0;

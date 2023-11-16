@@ -46,7 +46,16 @@ export function UserMenu({ user }) {
       >
         <Menu.Target>
           <ActionIcon variant="default">
+            {
+            user.photo ?
+            <Avatar
+                radius="xl"
+                src={user.photo}
+                color="yellow"
+              />
+            :
             <IconUserCircle style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+            }
           </ActionIcon>
         </Menu.Target>
         <Menu.Dropdown>
@@ -93,10 +102,13 @@ export function UserMenu({ user }) {
                 style={{ width: rem(16), height: rem(16) }}
                 stroke={1.5}
                 color={theme.colors.yellow[6]}
+
               />
             }
+            component='a'
+            href='/vans/liked'
           >
-            Saved Listings
+            Liked Listings
           </Menu.Item>
           <Menu.Item
             leftSection={
