@@ -48,21 +48,21 @@ export default function ExploreVanCard({id, name, price, imageUrl, type}: CardPr
             <Group gap="lg">
               <Center>
                 <IconCurrencyDollar
-                    style={{ width: rem(18), height: rem(18) }}
-                    stroke={1.5}
+                    style={{ width: rem(22), height: rem(22) }}
+                    stroke={2}
                     color={theme.colors.gray[0]}
                 />
-                <Text size="lg" className={classes.bodyText}>
+                <Text size="xl" className={classes.bodyText}>
                   {price}
                 </Text>
               </Center>
               <Center>
                 <IconStar
-                  style={{ width: rem(18), height: rem(18) }}
-                  stroke={1.5}
+                  style={{ width: rem(20), height: rem(20) }}
+                  stroke={2}
                   color={theme.colors.gray[0]}
                 />
-                <Text size="lg" className={classes.bodyText}>
+                <Text size="xl" className={classes.bodyText}>
                   4.8
                 </Text>
               </Center>
