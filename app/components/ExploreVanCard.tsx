@@ -1,9 +1,9 @@
-import { IconCurrencyDollar, IconStar, IconPeace } from '@tabler/icons-react';
-import { Card, Text, Group, Center, rem, UnstyledButton, useMantineTheme } from '@mantine/core';
+import { IconCurrencyDollar, IconStar } from '@tabler/icons-react';
+import { Card, Text, Group, Center, rem, useMantineTheme } from '@mantine/core';
 import { upperFirst } from '@mantine/hooks';
 import classes from '../modules/ExploreVanCard.module.css';
 
-import PeaceButton from './PeaceIcon';
+import PeaceButton from './LikeButton';
 
 interface CardProps {
     id: string;
@@ -34,7 +34,7 @@ export default function ExploreVanCard({id, name, price, imageUrl, type}: CardPr
       <div className={classes.content}>
         <div>
 
-          <PeaceButton vanId={id}/>
+          <PeaceButton vanId={id} />
 
           <Text size="lg" className={classes.title} fw={700}>
             {name}
