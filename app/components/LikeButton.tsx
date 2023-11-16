@@ -101,7 +101,7 @@ export default function LikeButton({ vanId }){
                 {
                     selected ?
                     <IconHeartFilled
-                        style={{ width: rem(52), height: rem(52), opacity: 1, color: "#ff922b"}}
+                        style={{ width: rem(52), height: rem(52), opacity: 0.9, color: "#ff922b"}}
                         className={classes.peace}
                     />
                   :
