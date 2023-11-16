@@ -4,7 +4,8 @@ import { Suspense, useEffect, useState } from "react";
 import { createBrowserClient } from "@supabase/ssr";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import VanThumbnail from "../components/VanThumbnail";
+import ExploreVanCard from "../components/ExploreVanCard";
+// import VanThumbnail from "../components/VanThumbnail";
 import TypeTag from "../components/TypeTag";
 import Loading from "../loading";
 
@@ -42,15 +43,16 @@ export default function Vans(){
 
     const vansElement = vans.map(van => {
         const thumbnailEle =
-            <Link className="van--thumbnail" href={`/vans/${van.id}`} key={ van.id }>
-                <VanThumbnail
+            // <Link className="van--thumbnail" href={`/vans/${van.id}`} key={ van.id }>
+                <ExploreVanCard
                     id={ van.id }
                     name={ van.name }
                     price={ van.price }
                     imageUrl = { van.imageUrl }
                     type={ van.type }
+                    key={ van.id }
                 />
-            </Link>
+            // </Link>
         return type ? van.type === type ? thumbnailEle : null : thumbnailEle;
     })
 
@@ -58,7 +60,7 @@ export default function Vans(){
                         .map(filter => {
                             return (
                                 <Link href={`?type=${filter}`} key={ filter }>
-                                    <TypeTag type={filter} isFilter={true}  className="vans__filter" isSelected={type === filter}/>
+                                    <TypeTag type={filter}/>
                                 </Link>
                             )
                         })

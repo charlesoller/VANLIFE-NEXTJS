@@ -9,7 +9,6 @@ export default async function VanDetail({ params }){
     const van = await getVan(params.id)
     return (
         <div className="van--detail">
-            <h1> test </h1>
             <Link href="/vans" className="van--detail__back">← Back to all vans</Link>
             <img className="van--detail__image" src={ van.imageUrl } alt="An image of a van available for rental." />
             <h1 className="van--detail__name">{ van.name }</h1>
