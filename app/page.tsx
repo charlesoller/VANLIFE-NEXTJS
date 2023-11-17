@@ -3,6 +3,7 @@ import { Overlay, Container, Title, Button, Text } from '@mantine/core';
 import classes from './modules/Home.module.css';
 import Link from 'next/link'
 import CardsCarousel from './components/Carousel';
+import SelfPromo from './components/SelfPromo';
 
 import { getVans } from './api/vanFetching'
 
@@ -34,6 +35,7 @@ export default async function Home() {
           <CardsCarousel elements={vans}/>
         </Container>
       </div>
+      <SelfPromo />
     </main>
   );
 }

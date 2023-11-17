@@ -103,7 +103,7 @@ export function UserMenu({ user }) {
                 />
               }
               component='a'
-              href="/host/create-listing"
+              href="/host/manage-listings"
             >
               Manage Listings
             </Menu.Item>

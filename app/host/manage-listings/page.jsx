@@ -10,6 +10,8 @@ import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { Group, Flex, Text, Button, Space, TextInput, Textarea, NativeSelect, Slider, SimpleGrid, Image } from '@mantine/core';
 import { useForm } from '@mantine/form';
 
+import ManageListingsOptions from "../../components/ManageListingsOptions"
+
 const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -92,6 +94,7 @@ export default function CreateListing(){
 
     return (
         <>
+            <ManageListingsOptions />
             <h1> List a new van </h1>
             <form onSubmit={form.onSubmit(values => handleSubmit(values, router))}>
                 <Flex

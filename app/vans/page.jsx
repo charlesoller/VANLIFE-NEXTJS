@@ -3,12 +3,11 @@
 import { Suspense, useEffect, useState } from "react";
 import { createBrowserClient } from "@supabase/ssr";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import ExploreVanCard from "../components/ExploreVanCard";
-// import VanThumbnail from "../components/VanThumbnail";
 import TypeTag from "../components/TypeTag";
-import Loading from "../loading";
-
+import VansLoading from "./VansLoading";
+import FiltersLoading from "./FiltersLoading"
 
 async function getVans(){
     const supabase = createBrowserClient(
@@ -28,7 +27,6 @@ async function getVans(){
 
 export default function Vans(){
     const searchParams = useSearchParams();
-    const router = useRouter();
     const [vans, setVans] = useState([])
     const type = searchParams.get('type')
 
@@ -68,15 +66,22 @@ export default function Vans(){
     return (
         <main className="vans">
             <h1 className="vans__title">Explore our van options</h1>
-            <div className="vans__filters">
-                {filtersElement}
-                <Link className="vans__filters__clear" href="/vans">{type ? "Clear Filters" : null}</Link>
-            </div>
-            <div className="vans__grid">
-                <Suspense fallback={<Loading />}>
+            {
+                vans.length ?
+                <div className="vans__filters">
+                    {filtersElement}
+                    <Link className="vans__filters__clear" href="/vans">{type ? "Clear Filters" : null}</Link>
+                </div>
+                : <FiltersLoading />
+            }
+
+                {
+                    vans.length ?
+                    <div className="vans__grid">
                     {vansElement}
-                </Suspense>
-            </div>
+                    </div>
+                    : <VansLoading />
+                }
         </main>
     )
 }

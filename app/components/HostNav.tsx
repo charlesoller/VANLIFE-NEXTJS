@@ -34,7 +34,7 @@ function NavbarLink({ icon: Icon, label, active, onClick, path }: NavbarLinkProp
 
 const pages = [
   { icon: IconHome2, label: 'Dashboard', path:'/host' },
-  { icon: IconGauge, label: 'Manage Listings', path:'/host/create-listing' },
+  { icon: IconGauge, label: 'Manage Listings', path:'/host/manage-listings' },
   { icon: IconDeviceDesktopAnalytics, label: 'Analytics', path: '/host/income' },
   { icon: IconMessageDots, label: 'Reviews', path: '/host/reviews'},
   { icon: IconSettings, label: 'Settings', path: '/' }

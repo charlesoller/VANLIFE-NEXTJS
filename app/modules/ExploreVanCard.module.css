@@ -25,10 +25,6 @@
     }
   }
 
-  .test {
-    background: red;
-  }
-
   .image {
     position: absolute;
     inset: 0;
