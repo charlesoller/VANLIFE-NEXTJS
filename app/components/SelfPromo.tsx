@@ -8,10 +8,10 @@ export default function SelfPromo() {
       <div className={classes.body}>
         <Title className={classes.title}>Enjoying the website?</Title>
         <Text fw={500} fz="lg" mb={5}>
-          I'm looking for work!
+          I am looking for work!
         </Text>
         <Text fz="sm" c="dimmed">
-          A website like this and more could all be yours, send me an email if you're interested in creating something beautiful with me.
+          A website like this and more could all be yours, send me an email if you are interested in creating something beautiful with me.
         </Text>
 
         <div className={classes.controls}>

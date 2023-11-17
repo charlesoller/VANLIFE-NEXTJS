@@ -5,8 +5,6 @@ import Card from "@/app/components/VanCard";
 import { useState, useEffect } from "react";
 import { createBrowserClient } from "@supabase/ssr";
 
-
-
 export default function LikedListings(){
     const [ vans, setVans ] = useState([])
     useEffect(() => {
@@ -66,7 +64,7 @@ export default function LikedListings(){
             {
                 vans.length ?
                 vanElements
-                : <h3>You haven't currently liked any vans.</h3>
+                : <h3>You have not currently liked any vans.</h3>
             }
         </div>
 
