@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation'
 
 import { IconChristmasTree, IconMountain, IconCoin } from '@tabler/icons-react';
 
-export default function TypeTag({ type }){
+export default function TypeTag({ type, disabled, className }){
     const searchParams = useSearchParams();
     const search = searchParams.get('type')
 
@@ -23,7 +23,7 @@ export default function TypeTag({ type }){
     }
 
     return (
-        <Button leftSection={getIcon()} variant={search === type ? "filled" : "outline"} color="yellow" size="md" radius="xl">
+        <Button leftSection={getIcon()} variant={search === type ? "filled" : "outline"} color="yellow" size="md" radius="xl" disabled={disabled} className={className}>
             { upperFirst(type) }
         </Button>
     )

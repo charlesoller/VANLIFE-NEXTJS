@@ -35,3 +35,17 @@ export async function handlePossibleNewUser(data){
         }
     }
 }
+
+export async function getCurrentUserById(userId: string){
+    const supabase = await myCreateServerClient();
+    const {data, error} = await supabase
+        .from('users')
+        .select()
+        .eq('id', userId)
+
+    if(error){
+        console.log(error.message)
+    }
+
+    return data[0]
+}
