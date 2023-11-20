@@ -1,6 +1,6 @@
 .name {
     font-size: 2.7rem;
-    margin-top: 0.7em;
+    margin-top: 0;
     margin-bottom: 0;
     text-spacing: 5rem;
 }
@@ -17,4 +17,8 @@
 
 .vanInfo {
     margin-bottom: 2em;
+}
+
+.description {
+    text-align: justify;
 }

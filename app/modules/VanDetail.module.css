@@ -3,4 +3,17 @@
     margin: 3rem auto;
 }
 
+.grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 64% 31%;
+    gap: 5%;
+}
 
+.promo {
+    margin: 4em 0;
+}
+
+.moreVans {
+    font-size: 1.5rem;
+}

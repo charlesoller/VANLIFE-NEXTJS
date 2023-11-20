@@ -1,0 +1,31 @@
+.body {
+    /* background: var(--mantine-color-yellow-5); */
+    padding: 1.5em 2em;
+    width: 100%;
+    height: min-content;
+    position: sticky;
+    top: 40px;
+    bottom: 40px;
+}
+
+.price {
+    font-size: 2.2rem;
+    margin: 0;
+    margin-right: 0.1em;
+}
+
+.rentButton {
+    width: 100%;
+    background: linear-gradient(to right, var(--mantine-color-yellow-5), var(--mantine-color-orange-5));
+    text-align: center;
+    color: #FFF;
+    font-weight: 700;
+    font-size: 1.3rem;
+    padding: 0.7em 0;
+    border-radius: 2em;
+}
+
+.rentButton:hover,
+.rentButton:focus {
+    background: var(--mantine-color-orange-5);
+}
