@@ -7,6 +7,7 @@ import './globals.css'
 import '@mantine/core/styles.css';
 import '@mantine/dropzone/styles.css';
 import '@mantine/carousel/styles.css';
+import '@mantine/dates/styles.css';
 
 // Custom Componenets
 import Header from './components/Header'

@@ -1,14 +1,26 @@
 "use client"
+import dayjs from 'dayjs';
 
 import classes from '../modules/PaymentWidget.module.css'
 import { Paper, Text, Flex, Divider, Space, Button } from '@mantine/core'
 import { DateInput } from '@mantine/dates';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function PaymentWidget({ price }){
-    const [ startDate, setStartDate ] = useState<Date | null>(null);
-    const [ endDate, setEndDate ] = useState<Date | null>(null);
+    const currentDate = new Date();
+    // const nextDate = new Date();
+    // nextDate.setDate(nextDate.getDate() + 1)
+    const [ startDate, setStartDate ] = useState<Date | null>(currentDate);
+    const [ endDate, setEndDate ] = useState<Date | null>(dayjs(currentDate).add(1, 'day').toDate());
+    // const [ endDateMinusOne, setEndDateMinusOne ] = useState<Date | null>(new Date());
+    const [ numDays, setNumDays ] = useState(1);
+
+    useEffect(() => {
+        // endDateMinusOne.setEndDateMinusOne(endDate.getDate() - 1)
+        setNumDays(Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)))
+    },[startDate, endDate]);
+    // console.log(startDate)
 
     return (
         <Paper className={classes.body} shadow="sm" radius="xl" withBorder>
@@ -22,6 +34,9 @@ export default function PaymentWidget({ price }){
                 onChange={setStartDate}
                 label="From:"
                 placeholder="Date input"
+                minDate={ currentDate }
+                maxDate={ dayjs(endDate).subtract(1, 'day').toDate() }
+                radius='xl'
             />
             <Space h="sm"/>
             <DateInput
@@ -29,9 +44,11 @@ export default function PaymentWidget({ price }){
                 onChange={setEndDate}
                 label="To:"
                 placeholder="Date input"
+                minDate={ dayjs(startDate).add(1, 'day').toDate() }
+                radius='xl'
             />
             <Divider my="lg"/>
-            <Text>Total: $195 + tax</Text>
+            <Text>Total: {`$${price * numDays}`} + tax</Text>
             <Divider my="lg"/>
             {/* <Button
                 // fullWidth

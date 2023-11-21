@@ -35,7 +35,9 @@ export default async function Home() {
           <CardsCarousel elements={vans}/>
         </Container>
       </div>
-      <SelfPromo />
+      <Container size='xxl' mt='xl' mb='xl'>
+        <SelfPromo />
+      </Container>
     </main>
   );
 }

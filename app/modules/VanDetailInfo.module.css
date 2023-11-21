@@ -15,6 +15,13 @@
     margin-right: 2em;
 }
 
+.type:hover {
+    &:disabled,
+    &[data-disabled] {
+        cursor: default;
+    }
+}
+
 .vanInfo {
     margin-bottom: 2em;
 }

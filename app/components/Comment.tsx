@@ -2,7 +2,7 @@ import { Text, Avatar, Group, Paper, Space } from '@mantine/core';
 
 export default function Comment(){
     return (
-        <Paper shadow="sm" radius="xl" p="xl">
+        <Paper shadow="sm" radius="xl" p="xl" style={{height: '97%'}}>
             <Group>
             <Avatar
                 src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png"

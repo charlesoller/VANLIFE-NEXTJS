@@ -8,6 +8,7 @@
     display: grid;
     grid-template-columns: 64% 31%;
     gap: 5%;
+    padding-bottom: 4px;
 }
 
 .promo {

@@ -7,16 +7,15 @@ import Comment from './Comment';
 
 export default function CommentCarousel(){
     return (
-        <Flex gap="2em" style={{height: '270px'}}>
+        <Flex gap="2em" style={{height: '100%'}}>
             <Carousel
-                height="100%"
                 withIndicators
                 controlSize={40}
                 slideSize="50%"
                 slideGap="md"
                 loop
                 align="start"
-                slidesToScroll={2}
+                slidesToScroll={1}
             >
                 <Carousel.Slide>
                     <Comment />

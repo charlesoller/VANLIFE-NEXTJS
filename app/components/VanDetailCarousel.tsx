@@ -15,13 +15,13 @@ interface VanProps {
 }
 
 export default function VanDetailCarousel({ van }: VanProps){
-    // console.log(van)
     return (
         <section className={classes.grid}>
             <div className={`${classes.imageContainer} ${classes.main}`}>
                 <Image
                     src={van.imageUrl}
                     alt="An image of a van available for rent."
+                    sizes='100%'
                     fill={true}
                     className={classes.image}
                 />
@@ -30,6 +30,7 @@ export default function VanDetailCarousel({ van }: VanProps){
                 <Image
                     src={van.imageUrl}
                     alt="An image of a van available for rent."
+                    sizes='100%'
                     fill={true}
                     className={classes.image}
                 />
@@ -38,6 +39,7 @@ export default function VanDetailCarousel({ van }: VanProps){
                 <Image
                     src={van.imageUrl}
                     alt="An image of a van available for rent."
+                    sizes='100%'
                     fill={true}
                     className={classes.image}
                 />

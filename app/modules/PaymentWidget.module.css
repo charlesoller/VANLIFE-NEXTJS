@@ -1,11 +1,10 @@
 .body {
-    /* background: var(--mantine-color-yellow-5); */
     padding: 1.5em 2em;
     width: 100%;
     height: min-content;
     position: sticky;
     top: 40px;
-    bottom: 40px;
+    /* bottom: 40px; */
 }
 
 .price {

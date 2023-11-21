@@ -34,9 +34,13 @@ export default async function VanDetail({ params }){
                     >
                         This is what people are saying
                     </Text>
-                    <CommentCarousel />
+                    <div>
+                        <CommentCarousel />
+                    </div>
                 </div>
-                <PaymentWidget price={ van.price } />
+                <div style={{paddingBottom: '3%'}}>
+                    <PaymentWidget price={ van.price } />
+                </div>
             </div>
             <div className={classes.promo}>
                 <SelfPromo />
@@ -47,7 +51,7 @@ export default async function VanDetail({ params }){
                 fw={700}
                 style={{fontSize: '1.7rem', marginBottom: '0.5em'}}
             >
-                This one not quite right? Try something else!
+                Not quite right? Try something else!
             </Text>
             <CardsCarousel elements={ allVans }/>
         </section>

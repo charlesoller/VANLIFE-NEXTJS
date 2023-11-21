@@ -26,7 +26,6 @@ interface VanProps {
 }
 
 export default function VanDetailInfo({ van, host }: VanProps){
-    console.log(host)
     return (
         <section className={classes.body}>
             <h1 className={classes.name}>{van.name}</h1>
