@@ -10,8 +10,8 @@ import '@mantine/carousel/styles.css';
 import '@mantine/dates/styles.css';
 
 // Custom Componenets
-import Header from './components/Header'
-import Footer from './components/Footer'
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 // Custom Function
 import { myCreateServerClient } from './api/customHooks'

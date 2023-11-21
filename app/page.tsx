@@ -1,5 +1,5 @@
 // import Image from 'next/image'
-import { Overlay, Container, Title, Button, Text } from '@mantine/core';
+import { Overlay, Container, Title, Button, Text, Space } from '@mantine/core';
 import classes from './modules/Home.module.css';
 import Link from 'next/link'
 import CardsCarousel from './components/Carousel';
@@ -30,11 +30,22 @@ export default async function Home() {
           </Link>
         </Container>
       </div>
+      <Space h='xl'/>
       <div>
         <Container size='xxl' mt='xl' mb='xl'>
+        {/* <Text
+                variant='gradient'
+                gradient={{ from: 'yellow', to: 'orange', deg: 90 }}
+                fw={900}
+                style={{fontSize: '3rem', marginBottom: '0.5em'}}
+            >
+        Check out our vans
+      </Text> */}
           <CardsCarousel elements={vans}/>
         </Container>
       </div>
+      <Space h='lg'/>
+
       <Container size='xxl' mt='xl' mb='xl'>
         <SelfPromo />
       </Container>
