@@ -15,10 +15,13 @@
     "@mantine/dropzone": "^7.2.1",
     "@mantine/form": "^7.2.1",
     "@mantine/hooks": "^7.2.2",
+    "@stripe/react-stripe-js": "^2.4.0",
+    "@stripe/stripe-js": "^2.2.0",
     "@supabase/auth-helpers-nextjs": "^0.8.7",
     "@supabase/ssr": "^0.0.4",
     "@supabase/supabase-js": "^2.38.4",
     "@tabler/icons-react": "^2.40.0",
+    "axios": "^1.6.2",
     "dayjs": "^1.11.10",
     "embla-carousel-autoplay": "^7.1.0",
     "embla-carousel-react": "^7.1.0",
@@ -27,7 +30,8 @@
     "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
-    "react-icons": "^4.11.0"
+    "react-icons": "^4.11.0",
+    "stripe": "^14.5.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.34",

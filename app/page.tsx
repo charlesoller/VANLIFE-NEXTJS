@@ -33,14 +33,6 @@ export default async function Home() {
       <Space h='xl'/>
       <div>
         <Container size='xxl' mt='xl' mb='xl'>
-        {/* <Text
-                variant='gradient'
-                gradient={{ from: 'yellow', to: 'orange', deg: 90 }}
-                fw={900}
-                style={{fontSize: '3rem', marginBottom: '0.5em'}}
-            >
-        Check out our vans
-      </Text> */}
           <CardsCarousel elements={vans}/>
         </Container>
       </div>

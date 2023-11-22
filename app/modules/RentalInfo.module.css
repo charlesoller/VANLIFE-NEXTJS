@@ -1,0 +1,10 @@
+.body {
+    width: 65%;
+    /* height: 100%; */
+    padding: 2em;
+}
+
+.image {
+    border-radius: 2rem;
+    object-fit: cover;
+}

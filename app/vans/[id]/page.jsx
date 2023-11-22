@@ -39,7 +39,7 @@ export default async function VanDetail({ params }){
                     </div>
                 </div>
                 <div style={{paddingBottom: '3%'}}>
-                    <PaymentWidget price={ van.price } />
+                    <PaymentWidget price={ van.price } id={ van.id }/>
                 </div>
             </div>
             <div className={classes.promo}>
