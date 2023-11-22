@@ -4,6 +4,8 @@ import { IconStarFilled } from '@tabler/icons-react'
 import TypeTag from '@/app/components/TypeTag'
 import Link from 'next/link'
 
+import LikeButton from './LikeButton'
+
 interface VanProps {
     van: {
         name: string,
@@ -28,7 +30,12 @@ interface VanProps {
 export default function VanDetailInfo({ van, host }: VanProps){
     return (
         <section className={classes.body}>
-            <h1 className={classes.name}>{van.name}</h1>
+            <Flex>
+                <h1 className={classes.name}>{van.name}</h1>
+                <div style={{marginLeft: '1em', marginTop: 'auto', marginBottom:'auto'}}>
+                    <LikeButton vanId={ van.id } size={48}/>
+                </div>
+            </Flex>
             <Flex className={ classes.vanInfo } align="center" gap="xs">
                 <TypeTag type={ van.type } className={classes.type} disabled/>
                 <IconStarFilled style={{ width: rem(16), height: rem(16), color: "#FFD43B"}} />

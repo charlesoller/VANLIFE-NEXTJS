@@ -3,7 +3,7 @@ import { Card, Text, Group, Center, rem, useMantineTheme } from '@mantine/core';
 import { upperFirst } from '@mantine/hooks';
 import classes from '../modules/ExploreVanCard.module.css';
 
-import PeaceButton from './LikeButton';
+import LikeButton from './LikeButton';
 
 interface CardProps {
     id: string;
@@ -33,9 +33,9 @@ export default function ExploreVanCard({id, name, price, imageUrl, type}: CardPr
 
       <div className={classes.content}>
         <div>
-
-          <PeaceButton vanId={id} />
-
+          <div className={classes.likePosition}>
+            <LikeButton vanId={id} size={52}/>
+          </div>
           <Text size="lg" className={classes.title} fw={700}>
             {name}
           </Text>

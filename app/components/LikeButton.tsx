@@ -1,3 +1,5 @@
+"use client"
+
 import { useMantineTheme, ActionIcon, Tooltip, rem } from "@mantine/core";
 
 import { useState, useEffect } from "react";
@@ -6,7 +8,7 @@ import classes from '../modules/ExploreVanCard.module.css';
 
 import { createBrowserClient } from "@supabase/ssr";
 
-export default function LikeButton({ vanId }){
+export default function LikeButton({ vanId, size }){
     const theme = useMantineTheme();
     const [selected, setSelected] = useState(false)
     const [disabled, setDisabled] = useState(false)
@@ -97,16 +99,16 @@ export default function LikeButton({ vanId }){
 
     return (
         <Tooltip label={selected ? "Remove from Liked" : "Add to Liked"}>
-            <ActionIcon onClick={handleClick} style={{ width: rem(52), height: rem(52) }} variant="transparent" disabled={disabled} className={classes.like}>
+            <ActionIcon onClick={handleClick} style={{ width: rem(size), height: rem(size) }} variant="transparent" disabled={disabled} className={classes.like}>
                 {
                     selected ?
                     <IconHeartFilled
-                        style={{ width: rem(52), height: rem(52), opacity: 0.9, color: "#FFD43B"}}
+                        style={{ width: rem(size), height: rem(size), opacity: 0.9, color: "#FFD43B"}}
                         className={classes.peace}
                     />
                   :
                     <IconHeart
-                        style={{ width: rem(52), height: rem(52), opacity: 0.5 }}
+                        style={{ width: rem(size), height: rem(size), opacity: 0.5 }}
                         stroke={2.5}
                         color={theme.colors.gray[0]}
                         className={classes.peace}
