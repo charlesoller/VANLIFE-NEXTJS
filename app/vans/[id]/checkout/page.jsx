@@ -24,8 +24,7 @@ export default async function Checkout({ params, searchParams }){
     const endDate = searchParams.to;
     const numDays = dayjs(endDate).diff(dayjs(startDate), 'day')
     const subtotal = van.price * numDays;
-    const total = (subtotal + (subtotal * 0.06)).toFixed(2) * 100
-    console.log(total)
+    const total = Math.round((subtotal + (subtotal * 0.06)) * 100);
     const paymentIntent = await stripe.paymentIntents.create({
         amount: Number(total),
         currency: "USD",
