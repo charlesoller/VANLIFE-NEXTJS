@@ -37,7 +37,7 @@ export default async function Checkout({ params, searchParams }){
     return (
         <main style={{padding: '2em'}}>
             <Flex align='center' gap='lg' style={{height: '65vh'}}>
-                <RentalInfo van={van} startDate={startDate} endDate={endDate} numDays={numDays} subtotal={subtotal} total={Math.round(total/100)}/>
+                <RentalInfo van={van} startDate={startDate} endDate={endDate} numDays={numDays} subtotal={subtotal} total={total}/>
                 <PaymentForm options={options} />
             </Flex>
         </main>

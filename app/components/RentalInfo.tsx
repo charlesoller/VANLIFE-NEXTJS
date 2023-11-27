@@ -35,7 +35,7 @@ export default function RentalInfo({van, startDate, endDate, numDays, subtotal, 
                         <Text fw={500}>{numDays}<Text span c='dimmed'> {numDays === 1 ? 'night' : 'night'}</Text></Text>
                         <Text fw={500}>Subtotal: ${subtotal}<Text span c='dimmed'> + tax</Text></Text>
                         <Divider w='100%' my='sm' />
-                        <Text fw={700} size='xl'>Total: ${total}</Text>
+                        <Text fw={700} size='xl'>Total: ${(total/100).toFixed(2)}</Text>
                     </Stack>
                 </Flex>
             </Paper>
