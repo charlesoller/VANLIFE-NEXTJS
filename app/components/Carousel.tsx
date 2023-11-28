@@ -36,26 +36,12 @@ export default function CardsCarousel({ elements }) {
                 image={van.imageUrl}
                 title={van.name}
                 category={van.type}
+                path={`/vans/${van.id}`}
             >
                 Rent this van
             </Card>
         </Carousel.Slide>
     ));
-
-    // const vansElement = vans.map(van => {
-    //     const thumbnailEle =
-    //         <Link className="van--thumbnail" href={`/vans/${van.id}`} key={ van.id }>
-    //             <VanThumbnail
-    //                 id={ van.id }
-    //                 name={ van.name }
-    //                 price={ van.price }
-    //                 imageUrl = { van.imageUrl }
-    //                 type={ van.type }
-    //             />
-    //         </Link>
-    //     return type ? van.type === type ? thumbnailEle : null : thumbnailEle;
-    // })
-
 
     return (
     <Carousel

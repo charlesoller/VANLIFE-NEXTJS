@@ -1,6 +1,7 @@
 "use client"
 
-import Link from "next/link";
+import { Container, Divider, SimpleGrid, Text } from "@mantine/core";
+
 import Card from "@/app/components/VanCard";
 import { useState, useEffect } from "react";
 import { createBrowserClient } from "@supabase/ssr";
@@ -45,28 +46,48 @@ export default function LikedListings(){
     }, [])
 
     let vanElements = vans.map(van => (
-        // <Link className="van--thumbnail" href={`/vans/${van.id}`} key={ van.id }>
-            <Card
-                key={ van.id }
-                id={ van.id }
-                image={van.imageUrl}
-                title={van.name}
-                category={van.type}
-            >
-                Rent this van
-            </Card>
-        // </Link>
+        <Card
+            key={ van.id }
+            id={ van.id }
+            image={van.imageUrl}
+            title={van.name}
+            category={van.type}
+            path={`/vans/${van.id}`}
+        >
+            Rent this van
+        </Card>
     ))
 
     return (
-        <div>
-            <h1>Liked Listings here</h1>
+        <Container my='lg'>
             {
                 vans.length ?
-                vanElements
-                : <h3>You have not currently liked any vans.</h3>
+                (
+                    <div>
+                        <Text
+                            variant='gradient'
+                            gradient={{ from: 'yellow', to: 'orange', deg: 90 }}
+                            fw={700}
+                            style={{fontSize: '2.5rem'}}
+                        >
+                            Your Liked Vans
+                        </Text>
+                        <Divider my='lg'/>
+                        <SimpleGrid cols={2}>
+                            { vanElements }
+                        </SimpleGrid>
+                    </div>
+                )
+                :
+                <Text
+                    variant='gradient'
+                    gradient={{ from: 'yellow', to: 'orange', deg: 90 }}
+                    fw={700}
+                    style={{fontSize: '2.5rem'}}
+                >
+                    You have not liked any vans yet.
+                </Text>
             }
-        </div>
-
+        </Container>
     )
 }

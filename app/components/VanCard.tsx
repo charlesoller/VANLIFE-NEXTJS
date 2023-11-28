@@ -8,9 +8,10 @@ interface CardProps {
     category: string;
     children: string;
     id: string
+    path: string
   }
 
-export default function Card({ image, title, category, children, id }: CardProps) {
+export default function Card({ image, title, category, children, id, path }: CardProps) {
 
     return (
       <Paper
@@ -28,11 +29,9 @@ export default function Card({ image, title, category, children, id }: CardProps
             {title}
           </Title>
         </div>
-        <Link href={`/vans/${id}`}>
-          <Button variant="gradient" gradient={{ from: 'yellow', to: 'orange', deg: 90 }} radius='lg'>
-              {children}
-          </Button>
-        </Link>
+        <Button variant="gradient" gradient={{ from: 'yellow', to: 'orange', deg: 90 }} radius='lg' component={Link} href={path}>
+            {children}
+        </Button>
       </Paper>
     );
   }

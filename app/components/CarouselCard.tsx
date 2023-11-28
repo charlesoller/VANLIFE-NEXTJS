@@ -1,6 +1,5 @@
 import { Paper, Text, Title, Button, useMantineTheme, rem, Container } from '@mantine/core';
 import Link from 'next/link';
-import Image from 'next/image';
 import classes from '../modules/Carousel.module.css';
 
 interface CardProps {
