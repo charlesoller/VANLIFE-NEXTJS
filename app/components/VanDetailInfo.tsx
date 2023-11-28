@@ -2,7 +2,7 @@ import classes from '../modules/VanDetailInfo.module.css'
 import { Flex, Text, Divider, rem, Avatar } from "@mantine/core"
 import { IconStarFilled } from '@tabler/icons-react'
 import TypeTag from '@/app/components/TypeTag'
-import Link from 'next/link'
+import { getCurrentUser } from '../api/api'
 
 import LikeButton from './LikeButton'
 
@@ -27,13 +27,15 @@ interface VanProps {
     };
 }
 
-export default function VanDetailInfo({ van, host }: VanProps){
+export default async function VanDetailInfo({ van, host }: VanProps){
+    const user = await getCurrentUser();
+    
     return (
         <section className={classes.body}>
             <Flex>
                 <h1 className={classes.name}>{van.name}</h1>
                 <div style={{marginLeft: '1em', marginTop: 'auto', marginBottom:'auto'}}>
-                    <LikeButton vanId={ van.id } size={48}/>
+                    {user.session && <LikeButton vanId={ van.id } size={48}/>}
                 </div>
             </Flex>
             <Flex className={ classes.vanInfo } align="center" gap="xs">

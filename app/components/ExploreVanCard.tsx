@@ -3,6 +3,10 @@ import { Card, Text, Group, Center, rem, useMantineTheme } from '@mantine/core';
 import { upperFirst } from '@mantine/hooks';
 import classes from '../modules/ExploreVanCard.module.css';
 
+import {useState, useEffect} from 'react'
+
+import { createBrowserClient } from '@supabase/ssr';
+
 import LikeButton from './LikeButton';
 
 interface CardProps {
@@ -14,7 +18,27 @@ interface CardProps {
   }
 
 export default function ExploreVanCard({id, name, price, imageUrl, type}: CardProps) {
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    async function getUser(){
+      const supabase = createBrowserClient(
+          process.env.NEXT_PUBLIC_SUPABASE_URL,
+          process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+      )
+      const { data } = await supabase.auth.getSession();
+
+      if(data){
+        setUser(data.session)
+      }
+    }
+
+    getUser();
+  }, [])
+
+
   const theme = useMantineTheme();
+
   return (
     <Card
       p="lg"
@@ -34,7 +58,7 @@ export default function ExploreVanCard({id, name, price, imageUrl, type}: CardPr
       <div className={classes.content}>
         <div>
           <div className={classes.likePosition}>
-            <LikeButton vanId={id} size={52}/>
+            {user && <LikeButton vanId={id} size={52}/>}
           </div>
           <Text size="lg" className={classes.title} fw={700}>
             {name}

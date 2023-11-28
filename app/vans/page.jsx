@@ -1,6 +1,6 @@
 "use client"
 
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { createBrowserClient } from "@supabase/ssr";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";

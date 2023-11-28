@@ -9,7 +9,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function PaymentWidget({ price, id, user }){
-    console.log(user)
     const currentDate = new Date();
     const [ startDate, setStartDate ] = useState<Date | null>(currentDate);
     const [ endDate, setEndDate ] = useState<Date | null>(dayjs(currentDate).add(1, 'day').toDate());
