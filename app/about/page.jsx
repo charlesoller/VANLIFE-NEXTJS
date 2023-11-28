@@ -2,8 +2,8 @@ import { Container, Text, Button, Flex, Divider, Space } from '@mantine/core';
 import classes from '../modules/About.module.css';
 import { IconBrandGithub } from '@tabler/icons-react';
 import Features from '../components/Features';
-import SelfPromo from '../components/SelfPromo';
 import Contact from '../components/Contact';
+import Link from 'next/link';
 
 export default function About() {
   return (
@@ -28,12 +28,14 @@ export default function About() {
             variant="gradient"
             gradient={{ from: 'yellow', to: 'orange' }}
             radius='xl'
+            component={ Link }
+            href='/vans'
           >
             Explore Vans
           </Button>
 
           <Button
-            component="a"
+            component={Link}
             href="https://github.com/charlesoller/VANLIFE-NEXTJS"
             size="xl"
             variant="default"

@@ -1,22 +1,24 @@
-import { Divider, Space, Text, Paper } from '@mantine/core';
+import { Divider, Text, Flex, Button } from '@mantine/core';
 import classes from '../../modules/VanDetail.module.css'
 
 //Custom Components
 import VanDetailCarousel from '@/app/components/VanDetailCarousel';
 import VanDetailInfo from '@/app/components/VanDetailInfo';
 import PaymentWidget from '@/app/components/PaymentWidget';
-import CommentCarousel from '@/app/components/CommentCarousel';
 import CardsCarousel from '@/app/components/Carousel';
 import SelfPromo from '@/app/components/SelfPromo';
+import CommentSection from '@/app/components/CommentSection';
 
 import { getVan, getVans } from '@/app/api/vanFetching';
-import { getCurrentUserById, getCurrentUser } from '@/app/api/api';
+import { getCurrentUserById, getCurrentUser, getCurrentUserByEmail } from '@/app/api/api';
 
 export default async function VanDetail({ params }){
     const van = await getVan(params.id)
     const allVans = await getVans();
     const host = await getCurrentUserById(van.hostId)
     const user = await getCurrentUser();
+    let userId = await getCurrentUserByEmail(user.session.user.email)
+    userId = userId[0].id
 
     return (
         <section className={ classes.body }>
@@ -25,17 +27,7 @@ export default async function VanDetail({ params }){
                 <div>
                     <VanDetailInfo van={ van } host={ host }/>
                     <Divider my='xl'/>
-                    <Text
-                        variant='gradient'
-                        gradient={{ from: 'yellow', to: 'orange', deg: 90 }}
-                        fw={700}
-                        style={{fontSize: '1.7rem', marginBottom: '0.5em'}}
-                    >
-                        This is what people are saying
-                    </Text>
-                    <div>
-                        <CommentCarousel />
-                    </div>
+                    <CommentSection userId={userId} vanId={van.id} hostId={host.id}/>
                 </div>
                 <div style={{paddingBottom: '3%'}}>
                     <PaymentWidget price={ van.price } id={ van.id } user= { user.session }/>

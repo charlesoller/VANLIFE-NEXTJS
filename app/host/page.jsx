@@ -36,7 +36,7 @@ export default async function Dashboard() {
     const vans = await getHostVans();
 
     const hostVans = vans.map(van => {
-        return <Card key={van.id} image={van.imageUrl} title={van.name} category={van.type}>View your van</Card>
+        return <Card key={van.id} image={van.imageUrl} title={van.name} category={van.type} path={`/host/manage-listings/${van.id}`}>View your van</Card>
     })
     return (
         <>

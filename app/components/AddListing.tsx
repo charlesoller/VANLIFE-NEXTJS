@@ -90,11 +90,11 @@ export default function AddListing(){
     return (
         <>
             <Text
-                    variant='gradient'
-                    gradient={{ from: 'yellow', to: 'orange', deg: 90 }}
-                    fw={700}
-                    style={{fontSize: '2rem'}}
-                >
+                variant='gradient'
+                gradient={{ from: 'yellow', to: 'orange', deg: 90 }}
+                fw={700}
+                style={{fontSize: '2rem'}}
+            >
                 List a New Van
             </Text>
             <Divider mt='sm' mb='xl'/>
