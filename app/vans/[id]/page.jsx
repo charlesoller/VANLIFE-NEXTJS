@@ -1,8 +1,6 @@
 import { Divider, Space, Text, Paper } from '@mantine/core';
 import classes from '../../modules/VanDetail.module.css'
 
-import Link from 'next/link'
-
 //Custom Components
 import VanDetailCarousel from '@/app/components/VanDetailCarousel';
 import VanDetailInfo from '@/app/components/VanDetailInfo';
@@ -12,12 +10,13 @@ import CardsCarousel from '@/app/components/Carousel';
 import SelfPromo from '@/app/components/SelfPromo';
 
 import { getVan, getVans } from '@/app/api/vanFetching';
-import { getCurrentUserById } from '@/app/api/api';
+import { getCurrentUserById, getCurrentUser } from '@/app/api/api';
 
 export default async function VanDetail({ params }){
     const van = await getVan(params.id)
     const allVans = await getVans();
     const host = await getCurrentUserById(van.hostId)
+    const user = await getCurrentUser();
 
     return (
         <section className={ classes.body }>
@@ -39,7 +38,7 @@ export default async function VanDetail({ params }){
                     </div>
                 </div>
                 <div style={{paddingBottom: '3%'}}>
-                    <PaymentWidget price={ van.price } id={ van.id }/>
+                    <PaymentWidget price={ van.price } id={ van.id } user= { user.session }/>
                 </div>
             </div>
             <div className={classes.promo}>

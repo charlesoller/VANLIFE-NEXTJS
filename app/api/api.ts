@@ -49,3 +49,10 @@ export async function getCurrentUserById(userId: string){
 
     return data[0]
 }
+
+export async function getCurrentUser(){
+    const supabase = await myCreateServerClient()
+    const { data } = await supabase.auth.getSession()
+
+    return data;
+}

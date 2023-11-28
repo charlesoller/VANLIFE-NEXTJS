@@ -43,13 +43,3 @@ export default function RentalInfo({van, startDate, endDate, numDays, subtotal, 
 
     )
 }
-
-// .imageContainer {
-//     position: relative;
-// }
-
-// .image {
-//     object-fit: cover;
-//     object-position: 50% 70%;
-//     border-radius: 2rem;
-// }

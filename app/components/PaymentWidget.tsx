@@ -5,10 +5,11 @@ import classes from '../modules/PaymentWidget.module.css'
 import { Paper, Text, Flex, Divider, Space, Button } from '@mantine/core'
 import { DateInput } from '@mantine/dates';
 
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-export default function PaymentWidget({ price, id }){
+export default function PaymentWidget({ price, id, user }){
+    console.log(user)
     const currentDate = new Date();
     const [ startDate, setStartDate ] = useState<Date | null>(currentDate);
     const [ endDate, setEndDate ] = useState<Date | null>(dayjs(currentDate).add(1, 'day').toDate());
@@ -54,8 +55,10 @@ export default function PaymentWidget({ price, id }){
             >
                 <button
                     className={classes.rentButton}
+                    disabled={user ? false : true}
+                    style={!user ? {background: "transparent", color: "#D9D02F", border: "3px solid #D9D02F"} : null}
                 >
-                    Rent Now
+                    {user ? "Rent Now" : "Must Log In First"}
                 </button>
             </Link>
         </Paper>
