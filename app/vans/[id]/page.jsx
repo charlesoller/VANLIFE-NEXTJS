@@ -1,4 +1,5 @@
 import { Divider, Text, Flex, Button } from '@mantine/core';
+import { CarouselSlide } from '@mantine/carousel';
 import classes from '../../modules/VanDetail.module.css'
 
 //Custom Components
@@ -8,6 +9,9 @@ import PaymentWidget from '@/app/components/PaymentWidget';
 import CardsCarousel from '@/app/components/Carousel';
 import SelfPromo from '@/app/components/SelfPromo';
 import CommentSection from '@/app/components/CommentSection';
+import Comment from '@/app/components/Comment';
+
+import { nanoid } from 'nanoid';
 
 import { getVan, getVans } from '@/app/api/vanFetching';
 import { getCurrentUserById, getCurrentUser, getCurrentUserByEmail, getComments } from '@/app/api/api';
@@ -19,7 +23,11 @@ export default async function VanDetail({ params }){
     const user = await getCurrentUser();
     let userId = null;
     const comments = await getComments(van.id)
-
+    const commentElements = comments.map(comment => (
+        <CarouselSlide key={nanoid()}>
+            <Comment commenterId={comment.commenterId} rating={comment.rating} commentBody={comment.comment}/>
+        </CarouselSlide>
+    ))
 
     if(user.session){
         userId = await getCurrentUserByEmail(user.session.user.email)
@@ -33,7 +41,7 @@ export default async function VanDetail({ params }){
                 <div>
                     <VanDetailInfo van={ van } host={ host }/>
                     <Divider my='xl'/>
-                    <CommentSection comments={comments} userId={userId} vanId={van.id} hostId={host.id}/>
+                    <CommentSection commentElements={commentElements} userId={userId} vanId={van.id} hostId={host.id}/>
                 </div>
                 <div style={{paddingBottom: '3%'}}>
                     <PaymentWidget price={ van.price } id={ van.id } user= { user.session }/>

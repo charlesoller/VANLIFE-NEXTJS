@@ -6,10 +6,9 @@ import { useState } from "react"
 import CommentCarousel from "./CommentCarousel"
 import AddCommentForm from "./AddCommentForm";
 
-export default function CommentSection({comments, userId, vanId, hostId}){
+export default function CommentSection({commentElements, userId, vanId, hostId}){
     const [ error, setError ] = useState(null)
     const [opened, { open, close }] = useDisclosure(false);
-
 
     return (
         <>
@@ -40,7 +39,7 @@ export default function CommentSection({comments, userId, vanId, hostId}){
                 </div>
             </Flex>
             <div>
-                <CommentCarousel comments={comments}/>
+                <CommentCarousel commentElements={commentElements}/>
             </div>
 
             <Modal opened={opened} onClose={close} title='Leave a Comment' radius='xl' centered>

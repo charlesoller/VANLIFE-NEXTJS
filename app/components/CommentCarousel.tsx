@@ -2,15 +2,8 @@
 
 import { Flex } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
-import Comment from './Comment';
 
-export default function CommentCarousel({comments}){
-    const commentElements = comments.map(comment => (
-        <Carousel.Slide>
-            <Comment commenterId={comment.commenterId} rating={comment.rating} commentBody={comment.comment}/>
-        </Carousel.Slide>
-    ))
-
+export default function CommentCarousel({commentElements}){
     return (
         <Flex gap="2em" style={{height: '100%'}}>
             <Carousel
