@@ -2,7 +2,7 @@
 import dayjs from 'dayjs';
 
 import classes from '../modules/PaymentWidget.module.css'
-import { Paper, Text, Flex, Divider, Space, Button } from '@mantine/core'
+import { Paper, Text, Flex, Divider, Space } from '@mantine/core'
 import { DateInput } from '@mantine/dates';
 
 import { useState, useEffect } from 'react';
@@ -55,7 +55,7 @@ export default function PaymentWidget({ price, id, user }){
                 <button
                     className={classes.rentButton}
                     disabled={user ? false : true}
-                    style={!user ? {background: "transparent", color: "#D9D02F", border: "3px solid #D9D02F"} : null}
+                    style={!user ? {background: "transparent", color: "#D9D02F", border: "2.5px solid #D9D02F"} : null}
                 >
                     {user ? "Rent Now" : "Must Log In First"}
                 </button>

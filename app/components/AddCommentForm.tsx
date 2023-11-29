@@ -5,15 +5,16 @@ import { Textarea, Button, Rating, Text } from "@mantine/core"
 
 import { createBrowserClient } from "@supabase/ssr"
 
+import { useRouter } from "next/navigation"
+
 const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 )
 
-export default function AddCommentForm({userId, vanId, hostId}){
+export default function AddCommentForm({userId, vanId, hostId, closeModal}){
 
-    //the name will come automatically and be passed down, just need a form for text input and star rating
-    //the comment component will pull the name and photo from a passed in commenter id
+    const router = useRouter()
     const form = useForm({
         initialValues: {
             comment: '',
@@ -21,9 +22,57 @@ export default function AddCommentForm({userId, vanId, hostId}){
         }
     })
 
-    function handleSubmit(values){
-        console.log(values)
-        console.log(userId)
+    async function handleVanSubmit(values){
+        //fetching the current comments from supabase
+        const { data, error: fetchError } = await supabase.from('vans')
+            .select('comments')
+            .eq('id', vanId)
+        if(fetchError) console.log(fetchError)
+        //checking if there are currently any comments
+        //if not, set it equal to an array with the current comment
+        //if so then push the comment object into the array
+        let currComments = data[0].comments;
+        if(!currComments){
+            currComments = [{comment: values.comment, rating: values.rating, commenterId: userId}]
+        } else {
+            currComments.push({comment: values.comment, rating: values.rating, commenterId: userId})
+        }
+
+        //uploading to supabase
+        const { error: uploadError } = await supabase.from('vans')
+            .update({ comments: currComments })
+            .eq('id', vanId)
+        if(uploadError) console.log(uploadError)
+    }
+
+    async function handleUserSubmit(values){
+        //fetching the current comments from supabase
+        const { data, error: fetchError } = await supabase.from('users')
+            .select('comments')
+            .eq('id', userId)
+        if(fetchError) console.log(fetchError)
+        //checking if there are currently any comments
+        //if not, set it equal to an array with the current comment
+        //if so then push the comment object into the array
+        let currComments = data[0].comments;
+        if(!currComments){
+            currComments = [{comment: values.comment, rating: values.rating, vanId: vanId}]
+        } else {
+            currComments.push({comment: values.comment, rating: values.rating, vanId: vanId})
+        }
+        //uploading to supabase
+        const { error: uploadError } = await supabase.from('users')
+            .update({ comments: currComments })
+            .eq('id', userId)
+        if(uploadError) console.log(uploadError)
+    }
+
+    async function handleSubmit(values){
+        handleVanSubmit(values);
+        handleUserSubmit(values);
+        closeModal();
+        router.push(`/vans/${vanId}`)
+        router.refresh();
     }
 
     return (

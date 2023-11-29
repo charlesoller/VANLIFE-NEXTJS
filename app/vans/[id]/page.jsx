@@ -17,8 +17,12 @@ export default async function VanDetail({ params }){
     const allVans = await getVans();
     const host = await getCurrentUserById(van.hostId)
     const user = await getCurrentUser();
-    let userId = await getCurrentUserByEmail(user.session.user.email)
-    userId = userId[0].id
+    let userId = null;
+  
+    if(user.session){
+        userId = await getCurrentUserByEmail(user.session.user.email)
+        userId = userId[0].id
+    }
 
     return (
         <section className={ classes.body }>
