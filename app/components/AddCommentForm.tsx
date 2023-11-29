@@ -71,8 +71,8 @@ export default function AddCommentForm({userId, vanId, hostId, closeModal}){
         handleVanSubmit(values);
         handleUserSubmit(values);
         closeModal();
-        router.push(`/vans/${vanId}`)
-        router.refresh();
+        // router.push(`/vans/${vanId}`)
+        // router.refresh();
     }
 
     return (

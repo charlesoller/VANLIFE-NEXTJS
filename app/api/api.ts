@@ -56,3 +56,15 @@ export async function getCurrentUser(){
 
     return data;
 }
+
+export async function getComments(vanId){
+    const supabase = await myCreateServerClient();
+    const { data, error } = await supabase
+        .from('vans')
+        .select('comments')
+        .eq('id', vanId)
+
+    if(error) console.log(error)
+
+    return data[0].comments
+}
