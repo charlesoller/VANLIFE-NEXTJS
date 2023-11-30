@@ -35,7 +35,7 @@ export default function AddCommentForm({userId, vanId, hostId, closeModal}){
         if(!currComments){
             currComments = [{comment: values.comment, rating: values.rating, commenterId: userId}]
         } else {
-            currComments.push({comment: values.comment, rating: values.rating, commenterId: userId})
+            currComments.unshift({comment: values.comment, rating: values.rating, commenterId: userId})
         }
 
         //uploading to supabase
@@ -58,7 +58,7 @@ export default function AddCommentForm({userId, vanId, hostId, closeModal}){
         if(!currComments){
             currComments = [{comment: values.comment, rating: values.rating, vanId: vanId}]
         } else {
-            currComments.push({comment: values.comment, rating: values.rating, vanId: vanId})
+            currComments.unshift({comment: values.comment, rating: values.rating, vanId: vanId})
         }
         //uploading to supabase
         const { error: uploadError } = await supabase.from('users')

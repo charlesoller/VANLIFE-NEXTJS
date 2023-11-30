@@ -1,6 +1,6 @@
 "use client"
 
-import { Text, Flex, Button, Modal, Space } from "@mantine/core"
+import { Text, Flex, Button, Modal, Space, Container } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import { useState } from "react"
 import CommentCarousel from "./CommentCarousel"
@@ -12,7 +12,7 @@ export default function CommentSection({commentElements, userId, vanId, hostId})
 
     return (
         <>
-            <Flex justify='space-between'>
+            <Flex justify='space-between' mb='md'>
                 <Text
                     variant='gradient'
                     gradient={{ from: 'yellow', to: 'orange', deg: 90 }}
@@ -25,7 +25,6 @@ export default function CommentSection({commentElements, userId, vanId, hostId})
                     <Text c='red' fw={700}>
                         {error}
                     </Text>
-                    <Space my='xs'/>
                     <Button
                         variant={userId ? 'gradient' : 'outline'}
                         color={!userId && 'yellow'}

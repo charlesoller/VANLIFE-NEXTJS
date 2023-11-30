@@ -7,18 +7,20 @@ import { loadStripe } from '@stripe/stripe-js';
 
 import { useState } from 'react'
 
+import { addTransaction, removeTransaction } from '../api/transactionUtils';
+
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
 
-const CheckoutForm = () => {
+const CheckoutForm = ({vanId, numDays}) => {
   const stripe = useStripe();
   const elements = useElements();
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, vanId, numDays) => {
     e.preventDefault();
 
     if (!stripe || !elements) {
@@ -29,6 +31,8 @@ const CheckoutForm = () => {
 
     setIsLoading(true);
 
+    const id = await addTransaction(vanId, numDays)
+
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
@@ -37,11 +41,12 @@ const CheckoutForm = () => {
       },
     });
 
-
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message);
+      removeTransaction(id);
     } else {
       setMessage("An unexpected error occurred.");
+      removeTransaction(id);
     }
 
     setIsLoading(false);
@@ -49,7 +54,7 @@ const CheckoutForm = () => {
 
   return (
     <Paper shadow="sm" radius="xl" withBorder p="xl" style={{ width: '30%' }}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => handleSubmit(e, vanId, numDays)}>
         <PaymentElement />
         <Button
           disabled={isLoading || !stripe || !elements}
@@ -58,7 +63,7 @@ const CheckoutForm = () => {
           size='lg'
           radius='xl'
           mt='lg'
-          onClick={handleSubmit}
+          type='submit'
         >
           Pay now
         </Button>
@@ -69,10 +74,10 @@ const CheckoutForm = () => {
   );
 };
 
-export default function PaymentForm({options}){
+export default function PaymentForm({options, vanId, numDays}){
   return (
     <Elements stripe={stripePromise} options={options}>
-      <CheckoutForm />
+      <CheckoutForm vanId={vanId} numDays={numDays} />
     </Elements>
   )
 }

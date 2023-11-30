@@ -37,7 +37,7 @@ export default async function Checkout({ params, searchParams }){
         <main style={{padding: '4em 2em'}}>
             <Flex align='center' gap='lg' style={{height: '65vh'}}>
                 <RentalInfo van={van} startDate={startDate} endDate={endDate} numDays={numDays} subtotal={subtotal} total={total} />
-                <PaymentForm options={options} />
+                <PaymentForm options={options} vanId={van.id} numDays={numDays}/>
             </Flex>
         </main>
     )

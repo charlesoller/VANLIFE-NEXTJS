@@ -132,7 +132,7 @@ export function UserMenu({ user }) {
               />
             }
           >
-            Your comments
+            Activity
           </Menu.Item>
 
           <Menu.Label>Settings</Menu.Label>
