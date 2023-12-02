@@ -37,7 +37,7 @@ const pages = [
   { icon: IconGauge, label: 'Manage Listings', path:'/host/manage-listings' },
   { icon: IconDeviceDesktopAnalytics, label: 'Activity', path: '/host/activity' },
   { icon: IconMessageDots, label: 'Reviews', path: '/host/reviews'},
-  { icon: IconSettings, label: 'Settings', path: '/' }
+  { icon: IconSettings, label: 'Settings', path: '/host/settings' }
 ];
 
 export default function HostNav() {

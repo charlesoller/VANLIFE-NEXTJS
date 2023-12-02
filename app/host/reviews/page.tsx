@@ -2,12 +2,14 @@ import Review from "@/app/components/Review"
 import { Text } from "@mantine/core"
 
 import { getReviews } from "@/app/api/reviewUtils";
+import { nanoid } from "nanoid";
 
 export default async function Reviews() {
     const reviews = await getReviews();
 
     const reviewElements = reviews.map(review => (
         <Review
+            key={nanoid()}
             vanId={review.vanId}
             rating={review.rating}
             comment={review.comment}
