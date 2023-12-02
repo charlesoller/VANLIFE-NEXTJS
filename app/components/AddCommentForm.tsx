@@ -67,9 +67,30 @@ export default function AddCommentForm({userId, vanId, hostId, closeModal}){
         if(uploadError) console.log(uploadError)
     }
 
+    async function handleReviewSubmit(values){
+        const {data: hostData, error: hostFetchError} = await supabase
+            .from('users')
+            .select()
+            .eq('id', hostId)
+        if(hostFetchError) console.log(hostFetchError)
+
+        let currReviews = hostData[0].all_reviews;
+        if(!currReviews){
+            currReviews = [{comment: values.comment, rating: values.rating, vanId: vanId, commenterId: userId}]
+        } else {
+            currReviews.unshift({comment: values.comment, rating: values.rating, vanId: vanId, commenterId: userId})
+        }
+
+        const { error: uploadError } = await supabase.from('users')
+            .update({ all_reviews: currReviews })
+            .eq('id', userId)
+        if(uploadError) console.log(uploadError)
+    }
+
     async function handleSubmit(values){
         handleVanSubmit(values);
         handleUserSubmit(values);
+        handleReviewSubmit(values)
         closeModal();
         router.refresh();
     }
