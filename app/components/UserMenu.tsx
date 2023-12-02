@@ -142,6 +142,8 @@ export function UserMenu({ user }) {
           <Menu.Label>Settings</Menu.Label>
           <Menu.Item
             leftSection={<IconSettings style={{ width: rem(16), height: rem(16) }} stroke={1.5} />}
+            component={Link}
+            href='/host/settings'
           >
             Account settings
           </Menu.Item>
