@@ -1,0 +1,22 @@
+.body {
+    height: 15vh;
+}
+
+.imageContainer {
+    height: 15vh;
+    width: 250px;
+    background-position: center;
+}
+
+.image {
+    height: 15vh;
+}
+
+.type, .transactionType {
+    text-transform: capitalize;
+}
+
+.transactionType:hover {
+    cursor: default;
+    background: 
+}

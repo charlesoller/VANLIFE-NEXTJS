@@ -5,6 +5,24 @@ import { myCreateServerClient } from "./customHooks"
 import { getVan } from "./vanFetching";
 import { getCurrentUserByEmail } from "./api";
 
+interface HostTransactionInterface {
+    transaction_id: string;
+    van_id: string;
+    num_days: number;
+    total_amount: number;
+    type: 'transaction';
+    transaction_time: Date;
+}
+
+interface UserOrderInterface {
+    transaction_id: string;
+    van_id: string;
+    num_days: number;
+    total_amount: number;
+    type: 'order';
+    transaction_time: Date;
+}
+
 export async function addTransaction(vanId, numDays){
     const supabase = await myCreateServerClient();
     const van = await getVan(vanId);
@@ -20,11 +38,12 @@ export async function addTransaction(vanId, numDays){
             host_id: hostId,
             van_id: vanId,
             num_days: numDays,
-            total_amount: total
+            total_amount: total,
+            transaction_time: new Date()
         })
     if(error) console.log(error)
     else {
-        addHostTransaction(hostId, transactionId, van.id, numDays, total);
+        await addHostTransaction(hostId, transactionId, van.id, numDays, total);
         AddUserOrder(transactionId, van.id, numDays, total)
     }
 
@@ -34,18 +53,13 @@ export async function addTransaction(vanId, numDays){
 async function addHostTransaction(hostId, transactionId, vanId, numDays, total){
     const supabase = await myCreateServerClient();
 
-    interface HostTransactionInterface {
-        transaction_id: string;
-        van_id: string;
-        num_days: number;
-        total_amount: number;
-    }
-
     const newTransaction: HostTransactionInterface = {
         transaction_id: transactionId,
         van_id: vanId,
         num_days: numDays,
-        total_amount: total
+        total_amount: total,
+        type: 'transaction',
+        transaction_time: new Date()
     }
 
     let { data: transactionData, error: fetchError } = await supabase
@@ -66,15 +80,11 @@ async function addHostTransaction(hostId, transactionId, vanId, numDays, total){
         .update({transactions: newTransactionData})
         .eq('id', hostId)
     if(postError) console.log(postError)
+
+    addToActivities(newTransaction)
 }
 
 async function AddUserOrder(transactionId, vanId, numDays, total){
-    interface UserOrderInterface {
-        transaction_id: string;
-        van_id: string;
-        num_days: number;
-        total_amount: number;
-    }
     const supabase = await myCreateServerClient();
     const { data: userData } = await supabase.auth.getSession();
     const user = await getCurrentUserByEmail(userData.session.user.email);
@@ -84,7 +94,9 @@ async function AddUserOrder(transactionId, vanId, numDays, total){
         transaction_id: transactionId,
         van_id: vanId,
         num_days: numDays,
-        total_amount: total
+        total_amount: total,
+        type: 'order',
+        transaction_time: new Date()
     }
 
     let { data: orderData, error: fetchError } = await supabase
@@ -103,6 +115,35 @@ async function AddUserOrder(transactionId, vanId, numDays, total){
     const { error: postError } = await supabase
         .from('users')
         .update({orders: newOrderData})
+        .eq('id', userId)
+    if(postError) console.log(postError)
+
+    addToActivities(newOrder)
+}
+
+async function addToActivities(activity: HostTransactionInterface | UserOrderInterface){
+    const supabase = await myCreateServerClient();
+    const { data: userData } = await supabase.auth.getSession();
+    const user = await getCurrentUserByEmail(userData.session.user.email);
+    const userId = user[0].id;
+
+    //Here and below needs to be changed for activities
+    let { data: activityData, error: fetchError } = await supabase
+        .from('users')
+        .select('all_activity')
+        .eq('id', userId)
+    if(fetchError) console.log(fetchError);
+
+    let newActivityData: object[];
+    if(activityData[0].all_activity === null){
+        newActivityData = [activity];
+    } else {
+        newActivityData = [activity, ...activityData[0].all_activity]
+    }
+
+    const { error: postError } = await supabase
+        .from('users')
+        .update({all_activity: newActivityData})
         .eq('id', userId)
     if(postError) console.log(postError)
 }

@@ -15,6 +15,8 @@ import {
 import { useRouter } from "next/navigation";
 import { createBrowserClient } from '@supabase/ssr';
 
+import Link from 'next/link';
+
 export function UserMenu({ user }) {
   const theme = useMantineTheme();
   const router = useRouter();
@@ -89,7 +91,7 @@ export function UserMenu({ user }) {
                   color={theme.colors.yellow[6]}
                 />
               }
-              component='a'
+              component={Link}
               href="/host"
             >
               Dashboard
@@ -102,7 +104,7 @@ export function UserMenu({ user }) {
                   color={theme.colors.yellow[6]}
                 />
               }
-              component='a'
+              component={Link}
               href="/host/manage-listings"
             >
               Manage Listings
@@ -118,7 +120,7 @@ export function UserMenu({ user }) {
 
               />
             }
-            component='a'
+            component={Link}
             href='/vans/liked'
           >
             Liked Listings
@@ -131,6 +133,8 @@ export function UserMenu({ user }) {
                 color={theme.colors.blue[6]}
               />
             }
+            component={Link}
+            href='/host/activity'
           >
             Activity
           </Menu.Item>
