@@ -36,9 +36,12 @@ export async function StatsGroup() {
 
   function getTotalRevenue(transactions){
     let total = 0;
-    transactions.forEach(transaction => {
-      total += Number(transaction.total_amount);
-    })
+    if(transactions){
+      transactions.forEach(transaction => {
+        total += Number(transaction.total_amount);
+      })
+    }
+
     return total.toFixed(2);
   }
 
@@ -48,11 +51,14 @@ export async function StatsGroup() {
 
   function getNumFiveStarReviews(reviews){
     let numFiveStarReviews = 0;
-    reviews.forEach(review => {
-      if(review.rating === 5){
-        numFiveStarReviews++;
-      }
-    })
+    if(reviews){
+      reviews.forEach(review => {
+        if(review.rating === 5){
+          numFiveStarReviews++;
+        }
+      })
+    }
+
     return numFiveStarReviews;
   }
 
