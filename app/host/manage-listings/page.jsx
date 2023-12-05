@@ -35,7 +35,7 @@ export default async function ManageListings(){
 
     const vans = await getHostVans();
     const hostVans = vans.map(van => {
-        return <Card key={van.id} image={van.imageUrl} title={van.name} category={van.type} path={`/host/manage-listings/${van.id}`}>Edit this van</Card>
+        return <Card key={van.id} image={van.imageUrl} title={van.name} category={van.type} path={`/vans/${van.id}`}>View this van</Card>
     })
 
     return (

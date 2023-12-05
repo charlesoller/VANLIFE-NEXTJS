@@ -21,7 +21,7 @@ const nextConfig = {
           protocol: 'https',
           hostname: 'jmermaivisuixassniym.supabase.co',
           port: '',
-          pathname: '/storage/v1/object/public/Images/*',
+          pathname: '/storage/v1/object/public/**',
         },
       ],
     }
