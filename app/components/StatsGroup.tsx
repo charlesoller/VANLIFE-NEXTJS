@@ -25,7 +25,7 @@ export async function StatsGroup() {
   }
 
   function getNumVansRented(transactions){
-    return transactions.length;
+    return transactions ? transactions.length : 0;
   }
 
   function getNumFiveStarReviews(reviews){

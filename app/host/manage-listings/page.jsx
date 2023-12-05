@@ -61,9 +61,14 @@ export default async function ManageListings(){
                 </Button>
             </Flex>
             <Divider my='lg'/>
-            <div className={classes.grid}>
-                { hostVans }
-            </div>
+            {
+                hostVans.length ?
+                <div className={classes.grid}>
+                    { hostVans }
+                </div>
+                :
+                <Text>You currently have no listed vans.</Text>
+            }
         </div>
     )
 }

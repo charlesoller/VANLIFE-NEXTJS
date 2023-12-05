@@ -15,14 +15,13 @@ export default function SelfPromo() {
         </Text>
 
         <div className={classes.controls}>
-          <TextInput
+          {/* <TextInput
             placeholder="Your email"
             classNames={{ input: classes.input, root: classes.inputWrapper }}
-          />
-          <Button className={classes.control} color="yellow">Send</Button>
+          /> */}
+          <Button className={classes.control} color="yellow" size='lg' radius='xl' component='a' href="mailto:charlesrello@gmail.com">Send</Button>
         </div>
       </div>
-      {/* <Image src={image.src} className={classes.image} /> */}
     </div>
   );
 }

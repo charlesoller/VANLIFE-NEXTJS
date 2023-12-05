@@ -5,7 +5,8 @@ import { getReviews } from "@/app/api/reviewUtils";
 import { nanoid } from "nanoid";
 
 export default async function Reviews() {
-    const reviews = await getReviews();
+    let reviews = await getReviews();
+    if(!reviews) reviews = []
 
     const reviewElements = reviews.map(review => (
         <Review
@@ -27,7 +28,11 @@ export default async function Reviews() {
             >
                 Your Reviews
             </Text>
-            {reviewElements}
+            {
+                reviews.length ?
+                reviewElements
+                : <Text>You do not yet have any reviews</Text>
+            }
         </section>
     )
 }

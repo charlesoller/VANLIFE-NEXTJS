@@ -6,6 +6,7 @@ import Card from "../components/VanCard";
 import { StatsGroup } from "../components/StatsGroup";
 
 import classes from '../modules/HostDashboard.module.css';
+import { Text } from "@mantine/core";
 
 
 export default async function Dashboard() {
@@ -36,9 +37,8 @@ export default async function Dashboard() {
     const vans = await getHostVans();
 
     const hostVans = vans.map(van => {
-        return <Card key={van.id} image={van.imageUrl} title={van.name} category={van.type} path={`/host/manage-listings/${van.id}`}>View your van</Card>
+        return <Card key={van.id} image={van.imageUrl} title={van.name} category={van.type} path={`/vans/${van.id}`}>View your van</Card>
     })
-    
     return (
         <>
             <section>
@@ -49,7 +49,11 @@ export default async function Dashboard() {
                     <h2>Your listed vans</h2>
                 </div>
                 <div className={classes.grid}>
-                    {hostVans}
+                    {
+                        hostVans.length ?
+                        hostVans
+                        : <Text>You have not yet listed any vans. Please go to manage listings to do so.</Text>
+                    }
                 </div>
             </section>
         </>

@@ -9,12 +9,12 @@ import {
   Text,
   Paper,
   Group,
-  PaperProps,
   Button,
   Divider,
   Anchor,
   Stack,
-  Container
+  Container,
+  Flex
 } from '@mantine/core';
 
 import { GoogleButton } from '../../components/GoogleButton';
@@ -28,7 +28,7 @@ export default function AuthenticationForm() {
   async function handleSubmit( form : UseFormReturnType<FormValues> ){
     const {data, error} = await handleLogin(form.values.email, form.values.password);
     if (error) console.log(error.message)
-    
+
     else {
       router.push('/host')
       router.refresh();
@@ -65,7 +65,7 @@ export default function AuthenticationForm() {
             <TextInput
               required
               label="Email"
-              placeholder="hello@vanlife.app"
+              placeholder="test@test.com"
               value={form.values.email}
               onChange={(event) => form.setFieldValue('email', event.currentTarget.value)}
               error={form.errors.email && 'Invalid email'}
@@ -75,7 +75,7 @@ export default function AuthenticationForm() {
             <PasswordInput
               required
               label="Password"
-              placeholder="Your password"
+              placeholder="test123"
               value={form.values.password}
               onChange={(event) => form.setFieldValue('password', event.currentTarget.value)}
               error={form.errors.password && 'Password should include at least 6 characters'}
@@ -87,9 +87,12 @@ export default function AuthenticationForm() {
             <Anchor href="/signup" c="dimmed" size="xs">
                 Need an account? Register
             </Anchor>
-            <Button type="submit" radius="xl" color='yellow'>
-              Login
-            </Button>
+            <Flex direction='column'>
+              <Button type="submit" radius="xl" color='yellow' mb='xs'>
+                Login
+              </Button>
+              <Text size='xs' c='dimmed'>Please use inputs in placeholder text for sample login</Text>
+            </Flex>
           </Group>
         </form>
       </Paper>

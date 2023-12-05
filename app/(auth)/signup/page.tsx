@@ -1,11 +1,8 @@
 "use client"
 
-import { nanoid } from 'nanoid'
 
 import { useRouter } from "next/navigation";
-import { createBrowserClient } from '@supabase/ssr'
 
-import { useToggle, upperFirst } from '@mantine/hooks';
 import { useForm, UseFormReturnType } from '@mantine/form';
 import {
   TextInput,
@@ -18,7 +15,8 @@ import {
   Checkbox,
   Anchor,
   Stack,
-  Container
+  Container,
+  Flex
 } from '@mantine/core';
 
 import { GoogleButton } from '../../components/GoogleButton';
@@ -137,9 +135,13 @@ export default function AuthenticationForm() {
             <Anchor href="/login" c="dimmed" size="xs">
               Already have an account? Login
             </Anchor>
-            <Button type="submit" radius="xl" color='yellow'>
-              Sign Up
-            </Button>
+            <Flex direction='column'>
+              <Button type="submit" radius="xl" color='yellow' mb='xs'>
+                Sign Up
+              </Button>
+              <Text c="dimmed" size='xs'>Note: this will prompt an email to the inputted email for verification</Text>
+              <Text c="dimmed" size="xs">Please go to log in page and follow instructions to test app.</Text>
+            </Flex>
           </Group>
         </form>
       </Paper>

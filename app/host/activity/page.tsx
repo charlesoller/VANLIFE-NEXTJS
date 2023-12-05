@@ -23,7 +23,11 @@ export default async function Activity(){
             >
                 Recent Activity
             </Text>
-            {activityElements}
+            {
+                activities.length ?
+                activityElements
+                : <Text>You have not yet rented a van or had any of your vans rented.</Text>
+            }
         </>
     )
 }

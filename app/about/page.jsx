@@ -49,8 +49,8 @@ export default function About() {
       </Container>
       <Container size='lg' mb={100}>
         <Features />
-        <Divider my={80}/>
-        <Contact />
+        {/* <Divider my={80}/>
+        <Contact /> */}
       </Container>
     </div>
   );
