@@ -81,7 +81,7 @@ async function addHostTransaction(hostId, transactionId, vanId, numDays, total){
         .eq('id', hostId)
     if(postError) console.log(postError)
 
-    addToActivities(newTransaction)
+    // addToActivities(newTransaction)
 }
 
 async function AddUserOrder(transactionId, vanId, numDays, total){
@@ -118,35 +118,35 @@ async function AddUserOrder(transactionId, vanId, numDays, total){
         .eq('id', userId)
     if(postError) console.log(postError)
 
-    addToActivities(newOrder)
+    // addToActivities(newOrder)
 }
 
-async function addToActivities(activity: HostTransactionInterface | UserOrderInterface){
-    const supabase = await myCreateServerClient();
-    const { data: userData } = await supabase.auth.getSession();
-    const user = await getCurrentUserByEmail(userData.session.user.email);
-    const userId = user[0].id;
+// async function addToActivities(activity: HostTransactionInterface | UserOrderInterface){
+//     const supabase = await myCreateServerClient();
+//     const { data: userData } = await supabase.auth.getSession();
+//     const user = await getCurrentUserByEmail(userData.session.user.email);
+//     const userId = user[0].id;
 
-    //Here and below needs to be changed for activities
-    let { data: activityData, error: fetchError } = await supabase
-        .from('users')
-        .select('all_activity')
-        .eq('id', userId)
-    if(fetchError) console.log(fetchError);
+//     //Here and below needs to be changed for activities
+//     let { data: activityData, error: fetchError } = await supabase
+//         .from('users')
+//         .select('all_activity')
+//         .eq('id', userId)
+//     if(fetchError) console.log(fetchError);
 
-    let newActivityData: object[];
-    if(activityData[0].all_activity === null){
-        newActivityData = [activity];
-    } else {
-        newActivityData = [activity, ...activityData[0].all_activity]
-    }
+//     let newActivityData: object[];
+//     if(activityData[0].all_activity === null){
+//         newActivityData = [activity];
+//     } else {
+//         newActivityData = [activity, ...activityData[0].all_activity]
+//     }
 
-    const { error: postError } = await supabase
-        .from('users')
-        .update({all_activity: newActivityData})
-        .eq('id', userId)
-    if(postError) console.log(postError)
-}
+//     const { error: postError } = await supabase
+//         .from('users')
+//         .update({all_activity: newActivityData})
+//         .eq('id', userId)
+//     if(postError) console.log(postError)
+// }
 
 export async function removeTransaction(transactionId: string){
     const supabase = await myCreateServerClient();

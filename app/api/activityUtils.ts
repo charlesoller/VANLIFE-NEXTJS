@@ -11,7 +11,13 @@ export async function getActivities(){
     const userEmail = data.session.user.email;
 
     const currentUser = await getCurrentUserByEmail(userEmail)
-
-    const allActivity = currentUser[0].all_activity ? currentUser[0].all_activity : [];
+    const allActivity = [];
+    if(currentUser[0].transactions){
+        allActivity.push(...currentUser[0].transactions)
+    }
+    if(currentUser[0].orders){
+        allActivity.push(...currentUser[0].orders)
+    }
+    // const allActivity = [...currentUser[0].transactions, ...currentUser[0].orders] || [];
     return allActivity;
 }

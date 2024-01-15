@@ -11,7 +11,7 @@ export default async function ActivityBanner({vanId, totalCost, type}){
             <Flex>
                 <div className={classes.imageContainer}>
                     <BackgroundImage
-                        src="https://jmermaivisuixassniym.supabase.co/storage/v1/object/public/Images/Rectangle%20155.webp"
+                        src={van.imageUrl}
                         radius="xl"
                     >
 
