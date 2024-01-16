@@ -34,6 +34,7 @@
     "stripe": "^14.5.0"
   },
   "devDependencies": {
+    "@types/node": "^20.11.3",
     "@types/react": "^18.2.34",
     "autoprefixer": "^10",
     "eslint": "^8",

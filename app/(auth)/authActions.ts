@@ -3,6 +3,8 @@
 import { createBrowserClient } from "@supabase/ssr";
 import { nanoid } from "nanoid";
 
+const URL = "https://vanlife-nextjs.vercel.app"
+
 const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -31,7 +33,7 @@ export async function handleLogin(email: string, password: string){
         email: email,
         password: password
     })
-    
+
     return {data, error}
 }
 
@@ -41,7 +43,7 @@ export async function handleSignInWithGoogle() {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `http://localhost:3000/auth/callback`,
+          redirectTo: `${URL}/auth/callback`,
           },
       })
 
