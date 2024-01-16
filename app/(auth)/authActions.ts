@@ -43,7 +43,7 @@ export async function handleSignInWithGoogle() {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${URL}/auth/callback`,
+          redirectTo: `https://vanlife-nextjs.vercel.app/auth/callback`,
           },
       })
 
